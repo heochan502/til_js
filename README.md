@@ -276,13 +276,17 @@ let userAgree : 참/거짓 숫자 1자 제한
 #### 1.4.1. 적용하기
 
 ```js
-let userName ="" 20자 제한
-let userNum ="" 13자 제한
-let userPhone ="" 11자 제한
-let userPost ="" 5자 제한
-let userAddress ="" 50자 제한
-let userEmail ="" 20자 제한
-let userId ="" 16자 제한
-let userPassword ="" 16자 제한
-let userAgree =false 숫자 1자 제한
+let userName = ""; // 20자 제한
+let userNum = ""; // 13자 제한
+let userPhone = ""; // 11자 제한
+let userPost = ""; // 5자 제한
+let userAddress = ""; // 50자 제한
+let userEmail = ""; // 20자 제한
+let userId = ""; // 16자 제한
+let userPassword = ""; // 16자 제한
+let userAgree = false; // 숫자 1자 제한
 ```
+
+#### var, let, const 정확히 제약사항 파악하기
+
+### 1.5. 참조형 데이터 종류(Reference Data Type)
