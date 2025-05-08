@@ -490,7 +490,7 @@ banner[0];
 banner[1];
 ```
 
-### 1.7 변수 종합 예제
+### 1.7. 변수 종합 예제
 
 - 인터파크 티켓 랭킹 작업
 
@@ -533,13 +533,13 @@ const ticketDayArr = ["05/07", "05/09", "05/04"];
 
 // 위의 사항을 효율적으로 관리하기 위한 작업
 const ticket_1 = {
-    title: "패텀 10주년 기념 공연",
-    img: "https://a.jpg",
-    url: "https://a.html",
-    rank: 1,
-    place: "대구",
-    day: "05/07"
-  };
+  title: "패텀 10주년 기념 공연",
+  img: "https://a.jpg",
+  url: "https://a.html",
+  rank: 1,
+  place: "대구",
+  day: "05/07",
+};
 console.Log(ticket_1);
 console.Log(ticket_1.title);
 console.Log(ticket_1.img);
@@ -548,31 +548,30 @@ console.Log(ticket_1.rank);
 console.Log(ticket_1.place);
 console.Log(ticket_1.day);
 
-
 const ticket_2 = {
-    title: "뮤지컬 <메디슨 카운티의 다리>",
-    img: "https://b.jpg",
-    url: "https://b.html",
-    rank: 2,
-    place: "서울",
-    day: "05/09"
-  };
+  title: "뮤지컬 <메디슨 카운티의 다리>",
+  img: "https://b.jpg",
+  url: "https://b.html",
+  rank: 2,
+  place: "서울",
+  day: "05/09",
+};
 console.Log(ticket_2);
-console.Log(ticket_2["title"]]);
+console.Log(ticket_2["title"]);
 console.Log(ticket_2["img"]);
 console.Log(ticket_2["url"]);
 console.Log(ticket_2["rank"]);
 console.Log(ticket_2["palce"]);
-console.Log(ticket_2[day];
+console.Log(ticket_2["day"]);
 
 const ticket_3 = {
-    title: "뮤지컬 <라이카>",
-    img: "https://c.jpg",
-    url: "https://c.html",
-    rank: 3,
-    place: "제주",
-    day: "05/04"
-  };
+  title: "뮤지컬 <라이카>",
+  img: "https://c.jpg",
+  url: "https://c.html",
+  rank: 3,
+  place: "제주",
+  day: "05/04",
+};
 const ticketInfoArr = [ticket_1, ticket_2, ticket_3];
 //보통 아래의 형태로 데이터가 들어오는 것을
 // JavaScript Object Notation 즉 SJON이라고 한다.
@@ -602,4 +601,318 @@ const ticketInfoJsonArr = [
     day: "05/04",
   },
 ];
+
+ticketInfoJsonArr[0].title;
+ticketInfoJsonArr[1].title;
+ticketInfoJsonArr[2].title;
+```
+
+## 2. 연산자(Operator)
+
+- 연산을 해서 결과값을 만드는 `기호`
+- 연산자에 의한 새로운 `결과값이 나오는것을 연산식`
+
+### 2.1. 사칙연산(`+ - * /`)
+
+- `+ 연산자`
+
+```js
+const numA = 0;
+const numB = 1;
+const result = numA + numB; //1
+```
+
+```js
+const strA = "안녕";
+const strB = :"hello";
+const result = strA + strB; //안녕hello
+
+```
+
+```js
+const strA = "홍길동";
+const result = "저기~" + strA + "님 반가워요!"; //저기~홍길동님 반가워요!
+```
+
+```js
+const strA = "홍길동";
+const numAge = 20;
+//저기~홍길동님 나이가 20이군요!
+// 숫자 + 글자는 글자로 인정함
+const result = "저기~" + strA + "님 나이가" + numAge + "이군요!";
+// 아래 처럼 탬플릿 문법을 추천합니다. 흔히 백틱이라고 합니다.
+const resultTemplate = `저기~ ${strA}님은 나이가 ${numAge}이군요!`;
+```
+
+```js
+<div class="section">
+  <div class="box_wrap">
+    <a href="https://~"> 뮤지컬 팬텀</a>
+    <img src="https://~" alt="뮤지컬 팬텀 배너 이미지" />
+  </div>
+</div>
+```
+
+```js
+ const link = "https://"
+ const img = "https://~"
+ const title = "h뮤지컬 팬텀"
+ const alt = "뮤지컬 팬텀 배너 이미지"
+ const result = '
+     <div class = "section">
+     <div class = "box_wrap">
+       <a href = "https://~"> 뮤지컬 팬텀</a>
+        <img src ="https://~" alt = "뮤지컬 팬텀 배너 이미지" />
+     </div>
+     </div>
+     ';
+
+const link = "https~";
+const img = "https~";
+const title = "뮤지컬 팬텀";
+const alt = "뮤지컬 팬텀 배너이미지";
+let tag = '<div class="section">';
+tag = tag + '  <div class="box_wrap">';
+tag = tag + '    <a href="' + link + '"https:~">' + title + '</a>';
+
+```
+
+```js
+const link = "https~";
+const img = "https~";
+const title = "뮤지컬 팬텀";
+const alt = "뮤지컬 팬텀 배너이미지";
+const tag = ` 
+<div class = "section">
+ <div class = "box_wrap">
+   <a href = "${link}"> ${title}</a>
+       <img src ="${img}" alt = "${alt}}$" />
+ </div>
+</div> 
+`;
+```
+
+```js
+const numA = 5;
+const numB = 8;
+const redultA = `${numA} + ${numB} = ${numA + numB}`;
+const redultB = `${numA} - ${numB} = ${numA - numB}`;
+const redultC = `${numA} * ${numB} = ${numA * numB}`;
+const redultD = `${numA} / ${numB} = ${numA / numB}`;
+```
+
+```js
+const a = 1; //number
+const b = "1"; //string
+// 1단계 number ===> string 으로 물어보지 않고 변환 (암묵적 데이터 타입변환)
+// string + string ====> string
+const result = a + b; // number +  string => string
+```
+
+- `- 연산자`
+
+```js
+const numA = 100;
+const numB = 10;
+const result = numA - numB; // 90
+```
+
+```js
+const numA = "100"; //string
+const numB = 10; //number
+// string을 number로 암묵적 변환 실패
+// number - number
+const result = numA - numB; // NaN(Not a Number)
+```
+
+- `* 연산자`
+
+```js
+const numA = 4;
+const numB = 2;
+const resultMulti = numA * numB; // 8
+const resultDevide = numA / numB; // 2
+```
+
+### 2.2. 나머지 연산(`%`)
+
+- 총 게시글 52개
+- 한 페이지당 5개 목록
+- 몇페이지가 필요한가?
+- 마지막 페이지에서 보여주어야 하는 게시글 수?
+
+```js
+const total = 52;
+const count = 5;
+const totalPage = total / count; // 소숫점 나옴
+const totalPageNumber = Math.ceil(totalPage); // 올림
+const LastCount = total % count; //나머지 나옴
+
+console.log(totalPage);
+console.log(totalPageNumber);
+console.log(LastCount);
+```
+
+### 2.3. 복합연산사 (연산 타이핑 수를 줄인다.)
+
+```js
+const numA = 5;
+const numB = 30;
+const result = numA + numB;
+const result 2
+
+```
+
+```js
+const numA = 5;
+let result = numA + 3; // 5+3 = 8
+// 코딩에 의한 가독성이 떨어집니다.
+// 그런데 PG들은 많이 사용하는 방식입니다.
+// result = result +10; 줄여서 작성함.
+result += 10; // 18
+// result = result - 5;
+result -= 5; // 13
+// result = result * 4;
+result *= 4; // 52
+// result = result / 2;
+result /= 2; // 26
+//result = result % 2; 나머지, 모듈러 연산자
+result %= 2; // 0
+```
+
+### 2.4. 증감연산자 (++ --)
+
+- 개발자 는 타이핑 수를 줄일려고 노력합니다.
+
+```js
+let num = 5;
+num = num + 1;
+num += 1;
+num++;
+++num;
+```
+
+```js
+let num = 5;
+num = num - 1;
+num -= 1;
+num--;
+--num;
+```
+
+```js
+let num = 20;
+// 후에 배치된 후치연산 이라서
+let numA = num--; //20 numA에는 20입니다. 그리고 연산
+num; //19
+```
+
+```js
+let num = 20;
+// 후에 배치된 전치연산 이라서
+let numA = --num; //numA에는 19입니다. 그리고 연산
+num; //19
+```
+
+### 2.5. 논리연산자
+
+- `무조건 이해`하셔야 합니다.
+- `falsy` 한 값의 종류 (js 에서 false 라고 판단하는 값)
+
+```js
+"";
+0;
+undefined;
+null;
+NaN;
+false;
+```
+
+#### 2.5.1. OR 연산자(또는)
+
+- 최종 결과가 true 인지 false 인지 결과를 변수에 저장
+- OR 연산자 : 2개중 1개라도 true 이면 true, 나머지 false
+
+```js
+let result = true || true;
+result = false || false;
+result = false || true;
+result = "" || true;
+let userPass;
+result = userPass || "비밀번호 넣으세요.";
+
+console.log(result);
+```
+
+#### 2.5.2. AND 연산자(그리고)
+
+- 둘다 true 면 true, 아니면 false
+- 변수에 결과값은 true, false가 담겨진다.
+
+```js
+let result = true && true;
+result = false && true;
+```
+
+#### 2.5.3. NOT 연산자(반대)
+
+```js
+let result = !true;
+```
+
+#### 2.5.4. 실습예제
+
+```js
+let nickName = "";
+let displayName = nickName || "Guest";
+console.log(displayName);
+```
+
+```js
+let title = null;
+let result = title || "제목없음";
+console.log(result);
+```
+
+```js
+let totalMoney = 0;
+let result = totalMoney || "장바구니가 비었습니다.";
+console.log(result);
+```
+
+```js
+let isLogin = true;
+let result = isLogin && "환영합니다.";
+console.log(result);
+```
+
+```js
+let isAdmin = false;
+let result = isAdmin && "관리자 메뉴 표시" && "환영합니다.";
+console.log(result);
+```
+
+```js
+let config = {};
+config.theme = config.theme || "light";
+console.log(config); // {theme: "light"} // 초기화 코드 뭐 설정값이 없으면 이거다
+```
+
+```js
+let options = {
+  lang: null,
+  fontSize: 0,
+};
+// 아래 코드에서 or 연산하고 참이면 참인값을 반환 우선권은 뒤에 선언된 값이 우선권이있음
+let lang = options.lang || "ko";
+let fontSize = options.fonSize || 20;
+```
+
+### 2.6. 비교연산자
+
+- 정말 중요합니다.
+
+```js
+let resultA = ("1" == 1);
+let resultB = "1" ==== 1;
 ```
