@@ -913,6 +913,490 @@ let fontSize = options.fonSize || 20;
 - 정말 중요합니다.
 
 ```js
-let resultA = ("1" == 1);
-let resultB = "1" ==== 1;
+// 데이터 값의 종류는 비교하지 않음
+let resultA = "1" == 1; // true
+
+// 데이터 값과 종류도 비교함.
+let resultB = "1" === 1; //false
+console.log(resultA);
+console.log(resultB);
+
+let resultC = 1 > 2;
+let resultD = 1 < 2;
+let resultE = 1 >= 2;
+let resultF = 1 <= 2;
+let resultG = 1 != 2;
+let resultH = 1 !== 2;
+
+console.log(resultC);
+console.log(resultD);
+console.log(resultE);
+console.log(resultF);
+console.log(resultG);
+console.log(resultH);
+```
+
+### 2.7. 병합연산자
+
+- 내가 FE라면 반드시 알아야함.
+- 일반적으로 기본값 셋팅에서 활용
+- falsy 가 아니라 `null, undefined` 일 때만 값을 비교할 경우
+- 아래에서 기대한 코드는 `0` 값이 나오길 기대하고 코드 진행함.
+
+```js
+let userName = null;
+let displayName = userName || "Guest";
+console.log(displayName);
+```
+
+- `??` 연산자는 null과 undefined 만 비교한다.
+- 나머지는 `||`과 같다.
+
+```js
+let userPoint = 0;
+let displayPoint = userPoint ?? 500000;
+console.log(displayPoint);
+```
+
+```js
+let formInput = {
+ name : "",
+ email: null,
+ phone : undefined,
+};
+const name = formInput.name ?? "이름없음";
+const email = formInput.email ?? "이메일 없음";
+const phone = formInput.phone ?? "전화 없음";
+
+console.log(name);
+console.log(email);
+console.log(phone);
+
+
+
+// 아래는 동일 문법
+const resutl = nickName ?? "닉네임 없음" // html
+document.innerHtml = `<p> ${result}`</p> // html
+
+<p> {{user.nickName ?? "닉네임 없음"}} </p> // 뷰
+<p> {user.nickName ?? "닉네임 없음"} </p> //리엑트
+```
+
+- `null은 개발자가 값`이 없다고 지정하는것, 값 지워라 청소해라
+- `undefined는 프로그램상에서 값`이 지정안되어서 임의로 넣는 값, js가 기본으로 지정
+
+### 2.8. 옵셔널체이닝(`?.`)
+
+- FE 라면 알아야 합니다.
+- 객체의 `속성 여부`에 따라 코드 진행.
+- `{ 속성 : 값, }`
+
+```js
+const user = {
+  // profile: {name: "홍길동"},
+  profile: null,
+};
+/*
+const user = {
+  profile: null,
+}; 객체안에 데이터 없으면 오류나면서 멈춤 웹브라우저 멈춤
+*/
+const age = user.profile?.age ?? "정보가 없어서 나이정보를 몰라용"; // null 예외가 발생한다 // '?'옵션으로 null이 있어도 문제없이 undefined 넣고 진행하게 // ?? 넣고 null이나 undefined 판별해서 맞으면 뒤에 내용 출력 개꿀
+console.log(age);
+```
+
+### 2.9. 3항 연산자
+
+- 연산자가 3개라서 3항 연산자라고 합니다.
+- `결과 = 조건식 ? 참일때 결과 : 거짓 일떄 결과`
+- 활용 빈도가 너무 높습니다.
+
+```js
+const userRole = "ADMIN"; //사용자등급
+//const url = 조건 ? 참 : 거짓 ;
+const url = userRole === "ADMIN " ? "admin.html" : "guest.html";
+```
+
+```js
+const age = 10;
+const result = age < 19 ? "동의서 필요 " : "성인 인증";
+```
+
+```js
+const goodCount = 10;
+const result = goodCount > 0 ? "재고가 있어요" : "재고가 없어용";
+```
+
+```js
+const user = {
+  isLogin: true,
+  name: "아이유",
+};
+const result = user?.isLogin ? `${user.name}님 반가워용` : "로그인 해 주세용";
+console.log(result);
+```
+
+```js
+let num = 5;
+let result = num % 2 === 0 ? "짝귀" : "홀수";
+```
+
+## 3. 조건문(Condition)
+
+### 3.1. if문
+
+- `참/거짓`을 판단하여 코드 분기 실행함.
+- 모양 1.
+
+```js
+if(조건)
+{
+ 조건이 참이면 실행;
+}
+```
+
+- 모양 2.
+
+```js
+if(조건)
+{
+  조건이 참이면 실행;
+}
+else
+{
+  조건이 거짓이면 실행;
+}
+```
+
+- 모양 3.
+
+```js
+if(조건1)
+ {
+  조건1이 참이면 실행;
+ }
+ else if(조건2)
+ {
+  조건2이 참이면 실행;
+ }
+ else if(조건3)
+ {
+   조건3이 참이면 실행;
+ }
+ else
+ {
+   조건이 거짓이면 실행;
+  }
+```
+
+    - 예제) 로그인이 된 경우에 메시지 출력하기
+
+```js
+const isLogin = true;
+if (isLogin === true) {
+  consol.Log("로그인 하셨네요. 반갑습니다.");
+  consol.Log("오늘도 좋은 하루되세요.");
+}
+
+if (isLogin) {
+  consol.Log("로그인 하셨네요. 반갑습니다.");
+  consol.Log("오늘도 좋은 하루되세요.");
+}
+
+//아래처럼 하시면 힘들어요. 코드 가독성 떨어져요.
+if (isLogin) consol.Log("로그인 하셨네요. 반갑습니다.");
+consol.Log("오늘도 좋은 하루되세요.");
+```
+
+- 예제) 로그인 된 경우의 메시지와 로그인 안된 경우의 메시지 출력하기.
+
+```js
+if (isLogin) {
+  consol.Log("로그인 하셨네요. 반갑습니다.");
+} else {
+  consol.Log("로그인하셔야 합니다.");
+}
+```
+
+- 예제) 나이에 따라서 다른 메시지 출력하기 (조건이 2개이상인 경우)
+
+```js
+const age = 19;
+if (age >= 60) {
+  console.log("어르신 이시네요.");
+} else if (age >= 50) {
+  console.log("50대 이시네요.");
+} else if (age >= 40) {
+  console.log("40대 이시네요.");
+} else if (age >= 30) {
+  console.log("30대 이시네요.");
+} else if (age >= 20) {
+  console.log("청년 이시네요.");
+} else {
+  console.log("미성년 이시네요.");
+}
+```
+
+- 예) 사용자가 입력한 항목이 값이 `없을 경우` 메시지 모내기
+
+```js
+const name = "홍길동";
+const pass = "1234";
+const useInfoCheck = false; // 사용자 정보 활용 동의
+const usdEmailCheck = false; // 이메일 수신동의
+
+if (name.trim() === "" || !name) {
+  // trim() <공백 다 제거
+  alert("이름을 입력하세요.");
+  console.log("ㅇ");
+  return;
+}
+
+if (!name) {
+  alert("이름을 입력하세요.");
+  console.log("ㅇ");
+  return;
+}
+
+if (!pass) {
+  alert("비밀번호를 입력하세요.");
+  return;
+}
+if (useInfoCheckuseInfoCheck === false) {
+  // useInfoCheck === false //이렇게 해도된다
+  alert("개인정보 동의를 체크하세요.");
+  return;
+}
+
+if (!useInfoCheck) {
+  // useInfoCheck === false //이렇게 해도된다
+  alert("개인정보 동의를 체크하세요.");
+  return;
+}
+
+if (usdEmailCheck === false) {
+  // usdEmailCheck === false //이렇게 해도된다
+  alert("이메일 수신 동의를 체크하세요.");
+  return;
+}
+
+if (!usdEmailCheck) {
+  // usdEmailCheck === false //이렇게 해도된다
+  alert("이메일 수신 동의를 체크하세요.");
+
+  return;
+}
+
+console.log("저의 서비스를 자유롭게 활용하세요.");
+```
+
+### 3.2. switch 문
+
+- `여러 개의 값` 중 하나의 `값`이 같은지 판단 후 실행 (값을 비교)
+
+```js
+switch (값){
+  case 비교값 1:
+        실행코드
+    break;
+  case 비교값 2:
+        실행코드
+    break;
+  case 비교값 3:
+        실행코드
+    break;
+  case 비교값 4:
+        실행코드
+    break;
+  default:
+        실행코드
+    break;
+}
+```
+
+- 예) 엘리베이터 층 예제
+
+```js
+const Layer = 6; //값
+switch (Layer) {
+  case 1:
+    console.log("1층에 내려 주세요");
+    break;
+  case 2:
+    console.log("2층에 내려 주세요");
+    break;
+  case 3:
+    console.log("3층에 내려 주세요");
+    break;
+  case 4:
+    console.log("4층에 내려 주세요");
+    break;
+  case 5:
+    console.log("5층에 내려 주세요");
+    break;
+  default:
+    console.log("당신은 내릴 층이 없습니다.");
+    break;
+}
+```
+
+- if와 switch 종합예제
+
+```js
+const userRole = "ADMIN";
+if (userRole === "MEMBER") {
+  console.log("회원입니다.");
+} else if (userRole === "ADMIN") {
+  console.log("관리자");
+} else {
+  console.log("비회원입니다.");
+}
+```
+
+```js
+const userRole = "ADMIN";
+switch (userRole) {
+  case "MEMBER":
+    console.log("회원입니다.");
+    break;
+  case "ADMIN":
+    console.log("관리자입니다.");
+    break;
+  default:
+    console.log("비회원입니다.");
+    break;
+}
+```
+
+## 4. 반복문(Loop)
+
+- 동일한 실행을 반복하는 문법
+
+### 4.1. for 구문
+
+- 주어진 `횟수만큼` 반복 실행 (`개발자가 반복횟수를 아는 경우`)
+
+```js
+for (초기값은 단 한번만 실행; 조건식의 결과가 true/false; 증감식은 조건식을 false 로 만들기 위한것){
+  할일 코드 작성
+}
+```
+
+```js
+const total = 10; // 반복횟수
+
+for (let i = 0; i < total; i = i + 1) {
+  console.log(`현재 i는 ${i}입니다.`);
+}
+```
+
+- 예제) 총 합계 값 알아내기
+
+```js
+// 장바구니 담긴 제품 가격 모음.
+const bucketsArr = [1000, 500, 700, 400];
+const total = bucketsArr.length; // 반복 횟수 //bucketsArr.length 배열의 길이 알려줌
+
+// 반복문 없다면
+let totalPrice = bucketsArr[0] + bucketsArr[1] + bucketsArr[2] + bucketsArr[3];
+// 반복문 있다면
+let totalPricefor = 0;
+for (let i; i < total; i++) {
+  totalPricefor = totalPricefor + bucketsArr[i];
+  // totalPricefor += bucketsArr[i];
+}
+```
+
+- 예) 제품의 이름과 가격 및 재고를 html 태그로 출력하는 예제
+
+```js
+
+```
+
+- 예) 백엔드에서 제품의 목록은 json 으로 주어진다.
+
+```js
+//백엔드에서 가져온 자료 json
+const goodData = [
+  { id: 542, name: "사과", price: 10000, stock: 10 },
+  { id: 5557, name: "딸기", price: 200, stock: 0 },
+  { id: 2147, name: "키위", price: 5000, stock: 5000 },
+];
+
+const total = goodData.length;
+console.log(total);
+
+for (let i = 0; i < total; i++) {
+  // 제품 1개를 뽑아서 보관한다.
+  const good = goodData[i];
+  // html 만들기
+  const tag = `<div id="${good.id}" class="good-box">
+      <p>제품명: ${good.name}</p>
+      <p>가격: ${good.price}</p>
+      <p>재고: ${good.stock || "재고가 없어요"}</p>    
+    </div>`;
+  console.log(tag);
+}
+```
+
+- 예) 구구단
+- for 문에서 break는 반복문 빠져나오고 종료하기
+- 가까운 fot 문에서 `break`는 반복문 빠져나오고 종료됨.
+
+```js
+const total = 9;
+for (let i = 1; i <= total; i++) {
+  if (i === 6) {
+    break;
+  }
+  console.log(i + "단"); //????
+
+  for (let j = 1; j <= total; j++) {
+    if (j === 6) {
+      break;
+    }
+    console.log(`${i} * ${j} = ${i * j}`); //????
+    //console.log(i + " * "+j +" = " + (i*j) );//????
+  }
+}
+```
+
+- 가까운 for문에서 `continue`는 반복문 실행 건너띄고계속 실행.
+
+```js
+const total = 9;
+for (let i = 1; i <= total; i++) {
+  if (i % 3 === 3) {
+    continue;
+  }
+  console.log(i + "단"); //????
+
+  for (let j = 1; j <= total; j++) {
+    if (j === 6) {
+      break;
+    }
+    console.log(`${i} * ${j} = ${i * j}`); //????
+    //console.log(i + " * "+j +" = " + (i*j) );//????
+  }
+}
+```
+
+### 4.2. fot in 구문
+
+- for 문으로 모두 가능하다.
+- for 를 `객체를 대상`으로 편리하게 사용하도록 지원하는 문법
+
+### 4.3. for of 구문
+
+- for 문으로 모두 가능하다.
+- for 를 `배열, 문자열등을 대상`으로 편리하게 사용하도록 지원하는 문법
+
+### 4.4. while 구문
+
+### 4.5. do while 구문
+
+## 5. 함수(Function)
+
+```
+
 ```
