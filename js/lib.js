@@ -111,6 +111,119 @@ while (count < 5) {
 
 count = 0;
 do {
-  console.log(count);
   count = count + 1;
+  console.log(count);
 } while (count < 5);
+
+// 아래는 사용자의 명단과 반가워요라는 메세지를 출력하는 기능이다./
+// function useMember () {
+//   let user_1 = "홍길동"
+//   let user_2 = "김길동"
+//   let user_3 = "박길동"
+//   let user_4 = "고길동"
+//   let user_5 = "정길동"
+//   console.log(user_1 + "님 반가워요.");
+//   console.log(user_2 + "님 반가워요.");
+//   console.log(user_3 + "님 반가워요.");
+//   console.log(user_4 + "님 반가워요.");
+//   console.log(user_5 + "님 반가워요.");
+//   }
+
+/**
+ * 숫자 더하기 기능
+ * @param {number} a
+ * @param {number} b
+ * @return {number} - 덧셈 결과
+ */
+function add(a, b) {
+  return a + b;
+}
+/**
+ * 숫자 빼기 기능
+ * @param {number} a
+ * @param {number} b
+ * @return {number} - 뺄셈 결과
+ *
+ */
+
+function minus(a, b) {
+  return a - b;
+}
+
+/**
+ * 숫자 곱하기 기능
+ * @param {number} a
+ * @param {number} b
+ * @return {number} - 곱하기 결과
+ *
+ */
+
+function multi(a, b) {
+  return a * b;
+}
+
+/**
+ * 숫자 나누기 기능
+ * @param {number} a
+ * @param {number} b
+ * @return {number} - 나눗셈 결과
+ *
+ * ------ 호출예 -----
+ * ```javascript
+ * let result = divide(5, 4)
+ * ```
+
+ */
+function divide(a, b) {
+  if (b !== "number") {
+    return alert("분모는 숫자여야 합니다.");
+  }
+  // 데이터 알아내고, 타입 비교하기
+  if (typeof a !== "number") {
+    return alert("분자는 숫자여야 합니다.");
+  }
+  return a / b;
+}
+
+// 덧셈 사용
+const resultAdd = add(5, 4);
+const resultMinus = minus(5, 4);
+const resultMulti = multi(5, 4);
+const resultDivide = divide(5, 4);
+
+//외부로 공개할 함수 생성
+/**
+ * 계산기 기능
+ * 계산기 기능은 +, -, *, / 기능이 있습니다.
+ * @param {string} symbol //+, -, *, / 기호 중 1개 입력
+ * @param {munber} a 숫자 입력
+ * @param {number} b 숫자 입력
+ * @return {number} 결과는 숫자
+ *
+ * 사용예) =========================================
+ * ```javascript
+ * const result = calculator("+", a, b);
+ * ```
+ *
+ */
+function calcurator(symbol, a, b) {
+  if (typeof symbol !== "string") {
+    return alert("기호를 입력하세요.");
+  }
+  switch (symbol) {
+    case "+":
+      add(a, b);
+      break;
+    case "-":
+      minus(a, b);
+      break;
+    case "/":
+      divide(a, b);
+      break;
+    case "*":
+      multi(a, b);
+      break;
+    default:
+      return alert("올바른 기호를 입력해 주세요");
+  }
+}
