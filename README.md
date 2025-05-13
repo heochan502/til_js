@@ -1873,7 +1873,7 @@ function showTotal() {
 }
 const result = showTotal(4, 5, 6, 7, 8, 9, 1, 2, 3); //java에서는 오류 javascript에서는 오류가아님
 
-
+- rest 파라메터는 전달된 매개변수에 정확한 값만 배열로 만든다.
 // 새로나온 문법
 
 function showTotal(...rest){
@@ -1883,7 +1883,130 @@ function showTotal(...rest){
   let total = 0;
   for (let i=0; i < rest.lenght; i++)
   {
-    total = total +rest{i};
+    total = total + rest{i};
   }
+  return total;
 }
+
+
+function showTotal(a, b,...rest){
+  console.log(a);
+  console.log(b);
+  console.log(rest);
+
+  let total = 0;
+  for (let i=0; i < rest.lenght; i++)
+  {
+    total = total + rest{i};
+  }
+  return total;
+}
+
+const result = showTotal(4, 5, 6, 7, 8, 9, 1, 2, 0);
+
 ```
+
+- Rest 파라메터는 기본 매개변수 적용후, `나머지를 배열로 추출` 한다.
+
+## 6. 함수 정의법을 꼭 이해하자.
+
+- 일반적 함수 만드는 법
+
+```js
+function 함수명(매개변수) {
+  return 결과값;
+}
+함수명(매개변수);
+```
+
+- 2. `변수의 값`으로 함수 만드는 법
+
+```js
+const 변수명 = function () {
+  return 결과값;
+};
+변수명(매개변수);
+```
+
+- 3. `const왜 변수명 = function 형태`가 필요하지?
+
+```js
+// 얘는 기능자체를 보내는것
+function add() {
+  return 1 + 2;
+}
+add();
+
+// 값을 보내는 것
+const addFun = function () {
+  return 1 + 2;
+};
+addFun();
+
+function test(_func) {
+  // callback 함수 : 전달 받아서 실행하네 .
+
+  _func();
+}
+
+const minusFun = function () {
+  return 1 - 2;
+};
+
+test(add); //값이 아니라서안된다
+test(addFun); // 가능 값이라서
+test(minusFun); // 값이라서 가능
+
+test(function () {
+  consol.log("go");
+});
+
+function addEventLindstener(event, fn) {
+  fn();
+}
+bt.addEventListener("click", function () {});
+```
+
+- 아래 코드는 특히 위치를 살펴보자. : 완성하고 사용하자.
+
+```js
+const addFN = function () {};
+
+add(); //호이스팅이 되므로 괜찮다.
+addFN(); //호이스팅 에러 발생한다. (주의하자)// 먼저 만들고 써야한다
+
+function add() {}
+```
+
+## 7. 함수 추가 정리
+
+### 7.1. 함수를 만들 시점 (언제 함수를 만들까에 대한 안내)
+
+#### 7.1.1. 코드가 너무 긴 경우( `하나의 결과를 만들기 위해서 작성시`)
+
+- 코드 가독성이 너무떨어져서 추후 분석이 곤란할때
+- 하나의 결과를 만들기 위한 과정을 작성중 너무 많은 코드가 작성될떄
+- 여러 줄이 작성되어서 한개의 결과를 만든다면 함수로 묶어서 만들까? 고민하자.
+
+#### 7.1.2. 동일한 기능이 여러 번 사용될때
+
+- 2번이상 동일한 기능이라면 만들까? 고민
+- 2번이상 동일한 기능인데 재료만 다르다? 함수만들까? 고민
+
+#### 7.1.3. 코드를 누군가에게 주어야 할때
+
+-코드를 공유할 때 함수만들까? 고민
+
+### 7.2. 함수 만드는 법
+
+- `{}`로 코드 블럭을 이용해서 묶어준다.
+- 이름을 짓는데, `동사`로 지어준다. (기본 : Camel case, 생성자 함수: Pascal )
+- 이름 뒤에 `(재료, 재료)` 를 작성한다.
+- 이름 뒤에 `(매개변수, 매개변수)` 를 작성한다.
+- 이름 뒤에 `(param, param)`를 작성한다.
+- function 키워드 작성해준다
+- `JSDoc`으로 사용설명서를 작성해 주면 좋겠다.
+
+### 7.3. 함수 사용법(`호출, Call` 등으로 명칭함)
+
+-함수 이름
