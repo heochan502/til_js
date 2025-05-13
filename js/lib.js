@@ -288,21 +288,21 @@
 // }
 // say();
 
-let brand = "NAVER";
-console.log(this);
-const say = () => {
-  console.log(this);
-  // this.brand = "NAVER";
-  function hi() {
-    console.log(this);
-  }
-  hi();
-};
-say();
+// let brand = "NAVER";
+// console.log(this);
+// const say = () => {
+//   console.log(this);
+//   // this.brand = "NAVER";
+//   function hi() {
+//     console.log(this);
+//   }
+//   hi();
+// };
+// say();
 
-var brand = "nike";
-window.brand = "nike";
-this.brand = "nike"; // 위랑 같은말
+// var brand = "nike";
+// window.brand = "nike";
+// this.brand = "nike"; // 위랑 같은말
 
 function now() {
   window.brand = "addias";
