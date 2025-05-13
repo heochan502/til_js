@@ -2152,7 +2152,7 @@ const sayArrow2 = (_word) => console.log(_word);
 
 // 실행 코드가 1 줄이면 {} 블럭 생략 가능
 // 매개변수()가 생략이 가능하다
-const sayArrow2 = (_word) => console.log(_word);
+const sayArrow3 = (_word) => console.log(_word);
 ```
 
 - 매개변수가 2개 이상일 때
@@ -2174,6 +2174,157 @@ const sayArrow = (_word, _name) => {
 const sayArrow2 = (_word, _name) => console.log(_word, _name);
 
 // 실행 코드가 1 줄이면 {} 블럭 생략 가능
-const sayArrow2 = _word, _name => console.log(_word, _name);
+// 매개변수 2개이상은 ()가 필수
+const sayArrow3 = (_word, _name) => console.log(_word, _name);
+```
 
+## 9. 스코프의 이해
+
+- 변수의 활용 가능한 범위
+- 제일 중요한 것은 `{}` 입니다.
+
+### 9.1. Scope의 종류 2가지
+
+- 전역 범위 : Global Scope
+- 지역 범위 : Local Scope
+
+### 9.2. 전역범위
+
+- 프로그램 어디서든 마음대로 접근해서 활용
+
+```js
+// 전역 변수
+const appName = "Java World";
+
+{
+  console.log(appName);
+}
+
+function say() {
+  console.log(appName);
+}
+say();
+
+console.log(this);
+```
+
+### 9.3. 지역범위
+
+- `{}` 블록 안쪽을 `지역범위`라 합니다.
+
+```js
+function say() {
+  console.log("안녕");
+}
+// 지역자리
+{
+  say();
+}
+say();
+```
+
+- function은 전역에 등록되므로 예측 곤란
+- 아래 코드는 협업 실패 : `function` 은 전역에 등록해서 쓰자
+- `function` 은 지역에 코드하지 말자.
+
+```js
+// 전역 자리
+
+// 개발자: 홍길동 지역 자리
+{
+  function say(_name) {
+    console.log(_name + " Hello");
+  }
+  say("홍길동");
+}
+
+// 개발자 : 고길동 지역자리
+{
+  function say(_name) {
+    console.log(_name + " 반가워");
+  }
+  say("고길동");
+}
+
+say("테스터");
+```
+
+```js
+// 전역 자리
+
+// 개발자: 홍길동 지역 자리
+{
+  const say = function (_name) {
+    console.log(_name + " Hello");
+  };
+  say("홍길동");
+}
+
+// 개발자 : 고길동 지역자리
+{
+  const say = function (_name) {
+    console.log(_name + " 반가워");
+  };
+  say("고길동");
+}
+
+say("테스터");
+```
+
+- 아래를 추천함
+
+```js
+// 전역 자리
+function say(_word) {
+  console.log("기본 실행 함수 : " + _word);
+}
+// 개발자: 홍길동 지역 자리
+{
+  const say = function (_name) {
+    console.log(_name + " Hello");
+  };
+  say("홍길동");
+}
+
+// 개발자 : 고길동 지역자리
+{
+  const say = function (_name) {
+    console.log(_name + " 반가워");
+  };
+  say("고길동");
+}
+
+say("테스터");
+```
+
+- 화살표 함수 샘플
+
+```js
+// 전역 자리
+function say(_word) {
+  console.log("기본 실행 함수 : " + _word);
+}
+// 개발자: 홍길동 지역 자리
+{
+  const say = (_name) => console.log(_name + " Hello");
+  say("홍길동");
+}
+
+// 개발자 : 고길동 지역자리
+{
+  const say = (_name) => console.log(_name + " 반가워");
+  say("고길동");
+}
+
+say("테스터");
+```
+
+## 10. `this` 라는 키워드가 우리를 괴롭힐 겁니다.
+
+- this가 스코프와 연결되면서 혼란스럽다.
+
+### 10.1. 전역 스코프의 this 는 `Window` 이다.
+
+```js
+console.log(this); // Window{...}
 ```
