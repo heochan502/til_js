@@ -304,15 +304,23 @@
 // window.brand = "nike";
 // this.brand = "nike"; // 위랑 같은말
 
-function now() {
-  window.brand = "addias";
+// function now() {
+//   window.brand = "addias";
+// }
+// console.log("함수 실행전 : ", brand);
+// console.log("함수 실행전 : ", this);
+// console.log("함수 실행전 : ", window.brand);
+
+// now();
+
+// console.log("함수 실행전 : ", this);
+// console.log("함수 실행전 : ", window.brand);
+// console.log("함수 실행후 : ", brand);
+
+// 대문자 즉 Pasal
+function Coffee() {
+  console.log(this);
 }
-console.log("함수 실행전 : ", brand);
-console.log("함수 실행전 : ", this);
-console.log("함수 실행전 : ", window.brand);
 
-now();
-
-console.log("함수 실행전 : ", this);
-console.log("함수 실행전 : ", window.brand);
-console.log("함수 실행후 : ", brand);
+Coffee();
+new Coffee();
