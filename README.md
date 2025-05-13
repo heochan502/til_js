@@ -2009,4 +2009,171 @@ function add() {}
 
 ### 7.3. 함수 사용법(`호출, Call` 등으로 명칭함)
 
--함수 이름
+- 함수 이름();
+- 함수를 호출했다.
+- 함수명 Call 했다.
+
+### 7.4. 함수 샘플
+
+- 넓이를 계산하는 기능, 그런데 2번이상 사용, 누군가에게 공유
+
+````js
+/**
+ * 너비를 계산해 주는 함수
+ * @param {number} _width
+ * @param {number} _height
+ * @returns {number}
+ * -- 함수 사용 예 --
+ * ```js
+ * const resutl = calcRect (5,4);
+ *
+ * ```
+ */
+function calcRect(_width = 0, _height = 0) {
+  // 초반에 무수하게 예외처리 코드가 작성이 된다.
+  // 업데이트 진행
+  return _width * _height;
+}
+// 함수 호출
+const result = calcRect(5, 4);
+console.log(result);
+````
+
+### 7.5. 한수의 추가 지식
+
+```js
+function 함수명(매개변수 = 기본값) {}
+function 함수명(매개변수 = 기본값) {}
+```
+
+- 매개 변수에는 제한이 없다.
+
+```js
+function 함수명(매개변수1, 매개변수2) {
+  const prams = arguments; // 배열로 접근 가능
+}
+함수명(1, 2, 3, 4, 5);
+```
+
+- arguments 말고 `rest 파마레터`를 쓰자
+
+```js
+function 함수명(매개변수1, 매개변수2) {
+  const prams = arguments; // 배열로 접근 가능
+}
+함수명(1, 2, 3, 4, 5);
+console.log("arg 함수명 ===========");
+console.log(prams); //다반줌 초과하면 모든걸 arg에 처넣음
+
+function 함수명(매개변수1, 매개변수2, ...res) {
+  // res 는 변수 명이고 ... 이 본체
+  const prams = res; // 배열로 접근 가능
+}
+함수명(1, 2, 3, 4, 5);
+console.log("res 함수명 ===========");
+console.log(prams); // 사용하느건 사용하고 아닌것들만 배열에 포함시킴
+```
+
+- 기본 함수 작성법 2가지
+
+- 함수를 `표현식 (Expression)`으로 만드는법
+- 변수에 함수를 담는 이유는 `함수에 매개변수`에 전달하려고
+
+```js
+// 기본 함수 정의
+function 함수명() {}
+
+// 함수 표현식 정의
+const 함수명 = function () {};
+```
+
+```js
+const add = function () {};
+
+function calcFunc(_fn) {
+  add();
+}
+
+calcFunc(add);
+```
+
+- 콜백 함수는 `특정한 이벤트`가 발생시 덩달아서 실행(추후 다시 보기)
+
+## 8. 화살표 함수 (Arrow Function)
+
+- FE 에서 함수 작성시 많이 볼수 있는 형태
+- 활용 비율이 높다. 반드시 이해해 보자.
+
+### 8.1. 화살표 함수가 필요한 이유
+
+- 함수가 간략해 집니다.
+- 함수가 촤적화 됩니다. (메모리절약, 성능 최적화)
+- this의 범위가 고정됩니다. (추후 진행)
+- new를 사용 못합니다. (추후 진행)
+
+### 8.2. 화살표 함수 작성법 (반드시 이해하세요.)
+
+- 매개변수가 없는 경우
+
+```js
+// 기본 함수
+function say() {
+  console.log("안녕");
+}
+// 표현식 함수
+const say = function () {
+  console.log("안녕");
+};
+// 화살표 함수
+const sayArrow = () => {
+  console.log("안녕");
+};
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+const sayArrow2 = () => console.log("안녕"); // 출력이나 단한줄만 명령 구문이 들어가면 중괄호 생략 가능
+```
+
+- `매개변수`가 오로지 `1개 있을 때`
+
+```js
+// 기본 함수
+function say(_word) {
+  console.log(_word);
+}
+// 표현식 함수
+const say = function (_word) {
+  console.log(_word);
+};
+// 화살표 함수
+const sayArrow = (_word) => {
+  console.log(_word);
+};
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+const sayArrow2 = (_word) => console.log(_word);
+
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+// 매개변수()가 생략이 가능하다
+const sayArrow2 = (_word) => console.log(_word);
+```
+
+- 매개변수가 2개 이상일 때
+
+```js
+// 기본 함수
+function say(_word, _name) {
+  console.log(_word, _name);
+}
+// 표현식 함수
+const say = function (_word, _name) {
+  console.log(_word, _name);
+};
+// 화살표 함수
+const sayArrow = (_word, _name) => {
+  console.log(_word, _name);
+};
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+const sayArrow2 = (_word, _name) => console.log(_word, _name);
+
+// 실행 코드가 1 줄이면 {} 블럭 생략 가능
+const sayArrow2 = _word, _name => console.log(_word, _name);
+
+```
