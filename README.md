@@ -2328,3 +2328,468 @@ say("테스터");
 ```js
 console.log(this); // Window{...}
 ```
+
+### 10.2. function의 this 는 `Window`이다.
+
+```js
+function say() {
+  console.log(this); //Window{....}
+  function hi() {
+    console.log(this); //Window{...}
+  }
+  hi();
+}
+say();
+```
+
+```js
+console.log(this);
+let brand = "NAVER";
+
+function say() {
+  console.log(this);
+  this.brand = "KKO";
+  function hi() {
+    console.log(this);
+  }
+  hi();
+}
+say();
+
+console.log(this);
+let brand = "NAVER";
+
+const say = () => {
+  console.log(this);
+  this.brand = "KKO";
+  function hi() {
+    console.log(this);
+  }
+  hi();
+};
+say();
+```
+
+### 10.3. function 또는 표현식 함수는 this 사용시 위험한 코드.
+
+- this는 동일한 스코프를 가르쳐서 값이 변할 위험이 존재
+- this는 물어보지도 않고 var 변수를 만들고 window 변수에 등록
+
+```js
+var brand = "nike";
+window.brand = "nike";
+this.brand = "nike"; // 위랑 같은말
+
+function now() {
+  window.brand = "addias";
+}
+console.log("함수 실행전 : ", brand);
+console.log("함수 실행전 : ", this);
+console.log("함수 실행전 : ", window.brand);
+
+now();
+
+console.log("함수 실행전 : ", this);
+console.log("함수 실행전 : ", window.brand);
+console.log("함수 실행후 : ", brand);
+```
+
+### 10.3. 화살표 함수의 this 는 `Window`가 아닐 수 있다.
+
+### 10.4. 객체에 속성으로 만든 함수에서의 this
+
+- 객체에서 this는 객체 전체를 가르킨다.
+- 어? function 사용하니까 `this 가 상황에 따라서 변하는데?`
+
+```js
+const Person = {
+    name: "아이유",
+    age: 20,
+    sayHi: finction(){
+      console.log(this);},
+};
+
+console.log(this);
+Person.age;
+Person.sayHi();
+
+```
+
+### 10.5. 객체 생성자 함수로 사용시 this
+
+- 생성된 객체가 this가 된다.
+- Pascal 로 적는 객체는 new를 쓰자라는게 약속 (처음이 대문자)
+
+```js
+// 대문자 즉 Pasal
+function Coffee() {
+  console.log(this);
+}
+
+Coffee();
+new Coffee(); // new 를 붙이면 this 가 window가 아니고 각 생성되는 객채의 포함된다
+
+function robot(_owner) {
+  this;
+}
+robot("길동이");
+// 객체를 생성하는 함수로 선언하고 싶다
+new robot();
+```
+
+- Local Scope 사용의 예
+
+```js
+const aaa = new여행만들기 { // new 를 쓰는이유
+  {
+    di :5,
+    title : "대구여행"
+  }
+}
+
+const aaa = {
+    id  = 5 ;
+    title = "대구여행"
+}
+
+배너만들기 {
+  {
+    id: 100,
+    title: "할인가격"
+  }
+
+}
+
+window.id=100;
+window.title="할인가격"
+
+```
+
+### 10.6. 내가 이해하기로 아래처럼 정리했다.
+
+- function에 작성한 this 는 `어디서 함수를 사용했는가`에 따라 다르다.
+
+```js
+function say(){
+  this 는 ? window가 된다.
+}
+say(); 지금은 glogal 영역 즉, window에서 사용했으므로
+```
+
+```js
+const Person = {
+say : function (){
+  this 는?
+}
+
+}
+
+Person.say(); 지금은 Person 이 say 함수를 사용했으므로
+```
+
+- 과연 출력 결과는 무엇이 나올까요?
+
+```js
+const Person = {
+  name: "아이유",
+  say: function () {
+    console.log(this.name);
+  },
+};
+Person.say();
+```
+
+### 10.7. 화살표 함수의 this 는?
+
+- 화살표 함수는 `상위 스코프`를 가르킨다.
+
+```js
+// 여기는 window
+const say = () => {
+  console.log(this); // 현재의 상위 범위를 가리킨다.
+  // window 출력됨
+};
+say();
+```
+
+```js
+const Person = {
+  name: "아이유",
+  say: function () {
+    console.log(this); // 객체가 호출
+    console.log(this.name); // 객체.name 호출
+    setTimeout(function () {
+      console.log(this); // window 호출
+      console.log(this.name); // window.name. 호출
+    }, 3000);
+  },
+  sayArray: function () {
+    console.log(this); // 객체가 호출
+    console.log(this.name); // 객체.name. 찾는다.
+    setTimeout(() => {
+      // 나위에 누가있냐 this 를 찾아서 가는 거
+      console.log(this); // 화살표는 나보다 위에 영역
+      console.log(this.name); // 위에 영역.name
+    }, 3000);
+  },
+};
+Person.say();
+```
+
+## 11. 생성자 함수 ( 목적이 `객체를 생성` 하는 것 )
+
+- `new 키워드`를 붙여서 함수를 호출한다.
+
+```js
+function Person() {
+  console.log(log);
+}
+new Person();
+```
+
+```js
+function Person(_name) {
+  this.name = _name;
+  this.say = function () {
+    console.log(this.name + "안녕");
+  };
+  console.log(this);
+  console.log(this.name);
+}
+
+const a = new Person("복진승");
+a.say();
+const b = new Person("강슬기");
+b.say();
+const c = new Person("황수빈");
+c.say();
+const d = new Person("정화섭");
+d.say();
+```
+
+- `prototype`을 이용하면 공통 기능을 자동으로 부여한다 좋다.
+
+```js
+function Person(_name) {
+  this.name = _name;
+  console.log(this);
+  console.log(this.name);
+}
+Person.prototype.say = function () {
+  console.log(this.name + "안녕");
+};
+
+const a = new Person("복진승");
+a.say();
+const b = new Person("강슬기");
+b.say();
+const c = new Person("황수빈");
+c.say();
+const d = new Person("정화섭");
+d.say();
+```
+
+## 12. 클래스
+
+- 목적이 `객체를 생성` 하는 것
+
+### 12.1. 생성자 메소드( constructor Method)
+
+```js
+class Person {
+  // 클래스에서 매소드 함수 만드는 법
+  // 메소드명 (){}
+  메소드명() {}
+  // 객체를 생성하는 함수 : 변경 불가
+  // 디폴트 객체 생성자 함수// 안적으면 그냥 만들어준다 적은이유는 매개변수로 만들어줄려고
+  constructor(_name, _age) {
+    // 초기값 설정
+    //  new로 할당만해도 자동 실행되는것
+    console.log("new 하면 자동 실행");
+    console.log(_name);
+    this.name = _name;
+    this.name = _age;
+  }
+}
+
+const a = new Person("둘리", 500000);
+console.log(a);
+```
+
+### 12.2. 나의 메소드 만들기
+
+- `메소드영(){ 할일 }`
+
+```js
+class Person {
+  // 클래스에서 매소드 함수 만드는 법
+  메소드명() {}
+  // 객체를 생성하는 함수 : 변경 불가
+  // 디폴트 객체 생성자 함수// 안적으면 그냥 만들어준다 적은이유는 매개변수로 만들어줄려고
+  constructor(_name, _age) {
+    // 초기값 설정
+    //  new로 할당만해도 자동 실행되는것
+    // console.log("new 하면 자동 실행");
+    // console.log(_name);
+    // property
+    this.name = _name;
+    this.name = _age;
+  }
+  // say 라는 메소드
+  // 메소드명 (){}
+  say() {
+    console.log(this.name);
+  }
+}
+
+const a = new Person("둘리", 500000);
+console.log(a);
+```
+
+### 12.3. 나의 속성 만들기
+
+- Property : 프로퍼티
+- constructor 안에서 만든다.
+
+```js
+constructor(_name, _age){
+  this.name = _name;
+  this.age = _age;
+}
+```
+
+### 12.4. 상속 이해해 보기
+
+- 1단계
+
+```js
+//동물
+class Animal {
+  constructor() {
+    this.eye = 2;
+    this.nose = 1;
+  }
+}
+
+//강아지
+class Dog {
+  constructor() {
+    this.eye = 2;
+    this.nose = 1;
+  }
+}
+
+//새
+class Bird {
+  constructor() {
+    this.eye = 2;
+    this.nose = 1;
+  }
+}
+```
+
+- 단계 2.
+
+```js
+//동물
+class Animal {
+  constructor(eye, nose) {
+    // new하고 실행해야 이게 자동실행됨
+    this.eye = eye;
+    this.nose = nose;
+  }
+  speak() {
+    console.log("소리를 내요");
+  }
+}
+const a = new Animal(2, 1); // 이걸 안하고 아래에서 super() 하면 가능
+//console.log(a.eye);
+a.speak();
+
+//강아지
+
+class Dog extends Animal {
+  constructor() {
+    //new Animal(); // 원래는 이렇게 써야하는데 아래의 내용로 대체 가능
+    // new Animal() <- 이걸 실행하는 내용이 아래의 super
+    super(4, 5); // 부모 클래스가 한번은 작동을 해야 부모의 정보를 불러 올 수 있어서 사용 구문
+    this.name = "개새끼";
+  }
+  speak() {
+    console.log("멍멍");
+  }
+}
+const b = new Dog();
+console.log(b.name);
+console.log(b.eye);
+console.log(b.speak);
+console.log(b);
+
+console.log(a.eye);
+//새
+class Bird extends Animal {
+  constructor() {
+    super(2, 1);
+    this.name = "이쁜새";
+    this.city = "대구";
+  }
+  speak() {
+    console.log("짹쨱");
+  }
+}
+const c = new Bird(10, 14);
+console.log(c.eye);
+console.log(c.nose);
+
+c.speak();
+console.log(c);
+```
+
+### 12.5. 접근 제한자 이해하기
+
+- 프로퍼티와 메소드를 활용하는 경우 제한 걸기
+
+### 12.5.1. 종류
+
+- 만약 java 라면
+
+```java
+public : 마음대로 접근 가능, 공유하는
+private : 사적인 즉, 클래스 내부에서만 접근가능
+protected : 상속 받은 클래스들만 접근 가능
+```
+
+- 만약 javascript 라면
+
+```js
+public : 마음대로 접근 가능, 공유가능하는
+# : 사적인 즉, 클래스 내부에만 접근가능(private 역할)
+
+
+class Animal {
+  // 안적으면 public (기본값)
+  eye;
+  // #을 적으면 private
+  #nose;
+
+  constructor(eye, nose) {
+    this.eye = eye;
+    this.#nose = nose;
+  }
+}
+
+class Dog extends Animal {
+  constructor() {
+    super(2, 5);
+  }
+}
+
+const a = new Dog();
+console.log(a);
+console.log(a.eye);
+console.log(a.#nose); // private 오류
+
+
+```
+
+### 12.6. static : 클래스에 고정된 속성, 메소드

@@ -318,9 +318,235 @@
 // console.log("함수 실행후 : ", brand);
 
 // 대문자 즉 Pasal
-function Coffee() {
-  console.log(this);
-}
+// function Coffee() {
+//   console.log(this);
+// }
 
-Coffee();
-new Coffee();
+// Coffee();
+// new Coffee();
+
+// function 배너만들기(_data) {
+//   this.id = _data.id;
+//   this.title = _data.title;
+// }
+
+// 배너만들기(1번);
+// new 배너만들기(1번);
+
+// 홍길동 작업자
+// function 여행만들기(_data) {
+//   this.id = _data.id;
+//   this.title = _data.title;
+// }
+
+// 김길동
+// function 베너만들기(_data) {
+//   this.id = _data.id;
+//   this.title = _data.title;
+// }
+
+// const aaa = new여행만들기 { // new 를 쓰는이유
+//   {
+//     di :5,
+//     title : "대구여행"
+//   }
+// }
+
+// const aaa = {
+//     id  = 5 ;
+//     title = "대구여행"
+// }
+
+// 배너만들기 {
+//   {
+//     id: 100,
+//     title: "할인가격"
+//   }
+
+// }
+
+// window.id=100;
+// window.title="할인가격"
+
+// const Person = {
+//   name: "아이유",
+//   say: function () {
+//     console.log(this.name);
+//   },
+// };
+// Person.say();
+
+// const say = () => {
+//   console.log(this); //현재의 상위 범위를 가르킨다
+//   // window 출력됨
+// };
+// say();
+
+// const Person = {
+//   name: "아이유",
+//   say: function () {
+//     console.log(this); // Person 객체
+//     console.log(this.name); // 아이유
+//   },
+//   sayArray: () => {
+//     console.log(this); //window
+//     console.log(this.name); // window.name
+//   },
+// };
+
+// person.say();
+// person.sayArray();
+
+// const Person = {
+//   name: "아이유",
+//   say: function () {
+//     console.log(this); // 객체가 호출
+//     console.log(this.name); // 객체.name 호출
+//     setTimeout(function () {
+//       console.log(this); // window 호출
+//       console.log(this.name); // window.name. 호출
+//     }, 3000);
+//   },
+//   sayArray: function () {
+//     console.log(this); // 객체가 호출
+//     console.log(this.name); // 객체.name. 찾는다.
+//     setTimeout(() => {
+//       // 나위에 누가있냐 this 를 찾아서 가는 거
+//       console.log(this); // 화살표는 나보다 위에 영역
+//       console.log(this.name); // 위에 영역.name
+//     }, 3000);
+//   },
+// };
+// Person.say();
+
+// function Person(_name) {
+//   this.name = _name;
+//   this.country = "한국"
+
+//   console.log(this);
+//   console.log(this.name);
+// }
+
+// Person.prototype.country = "미국";
+
+// Person.prototype.say = function () {
+//   console.log(this.name + "안녕");
+// };
+
+// const a = new Person("복진승");
+// a.say();
+// const b = new Person("강슬기");
+// b.say();
+// const c = new Person("황수빈");
+// c.say();
+// const d = new Person("정화섭");
+// d.say();
+
+// class Person {
+//   // 클래스에서 매소드 함수 만드는 법
+//   메소드명 (){}
+//   // 객체를 생성하는 함수 : 변경 불가
+//   // 디폴트 객체 생성자 함수// 안적으면 그냥 만들어준다 적은이유는 매개변수로 만들어줄려고
+//   constructor(_name, _age) { // 초기값 설정
+//     //  new로 할당만해도 자동 실행되는것
+//     // console.log("new 하면 자동 실행");
+//     // console.log(_name);
+//     // property
+//     this.name = _name;
+//     this.name = _age;
+//   }
+//   // say 라는 메소드
+//   say(){
+//     console.log(this.name);
+//   }
+// }
+
+// const a = new Person("둘리",500000);
+// console.log(a);
+
+// //동물
+// class Animal {
+//   constructor(eye, nose) {
+//     // new하고 실행해야 이게 자동실행됨
+//     this.eye = eye;
+//     this.nose = nose;
+//   }
+//   speak() {
+//     console.log("소리를 내요");
+//   }
+// }
+// const a = new Animal(2, 1); // 이걸 안하고 아래에서 super() 하면 가능
+// //console.log(a.eye);
+// a.speak();
+
+// //강아지
+
+// class Dog extends Animal {
+//   constructor() {
+//     //new Animal(); // 원래는 이렇게 써야하는데 아래의 내용로 대체 가능
+//     // new Animal() <- 이걸 실행하는 내용이 아래의 super
+//     super(4, 5); // 부모 클래스가 한번은 작동을 해야 부모의 정보를 불러 올 수 있어서 사용 구문
+//     this.name = "개새끼";
+//   }
+//   speak() {
+//     console.log("멍멍");
+//   }
+// }
+// const b = new Dog();
+// console.log(b.name);
+// console.log(b.eye);
+// console.log(b.speak);
+// console.log(b);
+
+// console.log(a.eye);
+// //새
+// class Bird extends Animal {
+//   constructor() {
+//     super(2, 1);
+//     this.name = "이쁜새";
+//     this.city = "대구";
+//   }
+//   speak() {
+//     console.log("짹쨱");
+//   }
+// }
+// const c = new Bird(10, 14);
+// console.log(c.eye);
+// console.log(c.nose);
+
+// c.speak();
+// console.log(c);
+
+// class Animal {
+//   // 안적으면 public (기본값)
+//   eye;
+//   // #을 적으면 private
+//   #nose;
+
+//   constructor(eye, nose) {
+//     this.eye = eye;
+//     this.#nose = nose;
+//   }
+// }
+
+// class Dog extends Animal {
+//   constructor() {
+//     super(2, 5);
+//   }
+// }
+
+// const a = new Dog();
+// console.log(a);
+// console.log(a.eye);
+// console.log(a.#nose); // private 오류
+
+class MathCalc {
+  constructor() {}
+  static add(a, b) {}
+  static minus(a, b) {}
+}
+MathCalc.add(3, 4);
+MathCalc.minus(3, 4);
+
+const a = new MathCalc();
+a.add(3, 4);
