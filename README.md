@@ -2793,3 +2793,168 @@ console.log(a.#nose); // private 오류
 ```
 
 ### 12.6. static : 클래스에 고정된 속성, 메소드
+
+
+```js
+class MathCalc {
+  constructor() {}
+  static add(a, b) {}
+  static minus(a, b) {}
+}
+MathCalc.add(3, 4);
+MathCalc.minus(3, 4);
+
+const a = new MathCalc();
+a.add(3, 4); // 생성된 객체로 접근불가
+
+Math.PI;
+Math.round(); //반올림
+Math.ceil(); //오림
+```
+
+## 13. 콜벡 함수
+
+ - `call` 은 함수를 실행(호출) 한다는 의미
+ - 일반 함수에 매개변수로 전달된 함수를 callback 함수라 칭한다.
+
+ ### 13.1. 콜백함수 활용처 
+
+ - 주로 사용자 행동에 따른 이벤트 발생시 실행하는 함수
+ - 서버 연동하여 자료를 호출하는 `이벤트 발생`시 실행하는 함수
+
+
+```js
+const say = function () {};
+const cry = () => {};
+function smile(){}
+
+//매개변수로 전달된 함수 실행
+function run(a){
+  a();
+}
+
+run(say);
+run(cry);
+run(smile); // 변수아니라서 안됨
+run(function (){}); // 이걸 추천함
+
+```
+
+
+```js
+const bt = document.querySelector(".bt");
+bt.addEventListener("click", function () {});
+```
+
+## 14. 객체 (Object)
+
+ - `객체 리터럴`로 생성한다.
+ - `리터럴(literal)` 이라는 단어는 꼭 정의해 두세요.
+    - 이터럴은 정해진 `값을 개발자가 직접 작성`해 주는 것.
+    - 숫자 리터럴, 문자열 리터럴, 배열 리터럴, 객체 리터럴 등
+
+```js
+const 객체 = {
+  객체키명 : 키값,
+  객체키명 : 키값
+};
+
+.wrap{
+  background-color: "red"
+}
+```
+ - 만약 객체를 1개씩 만든다면 즉, `객체리터럴로 생성한다`면 객체명은 소문자로
+
+ ```js
+ const personInfo = {
+  nickName : "아이유",
+  age : 20,
+  job: "singer"
+ };
+ ```
+
+ ### 14.2. 여러 개의 동일한 형태(구조)의 객체를 생성한다면
+  - `함수 생성자 함수`를 이용하는 법 (함수 이름이 `Pascal Case`)
+
+  ```js
+  function PersonInfo(_name, _age){
+    this.nickName = _name;
+    this.age = _age;
+    this.job = "singer";
+  }
+  const 아이유 = new PersonInfo("아이유", 20);
+  const BTS = new PersonInfo("BTS", 20);
+
+  ```
+  - `클래스 `를 이용하는 법(클래스 이름이 `Pascal Case`)
+
+
+```js
+class PersonInfo {
+  constructor(_name, _age) {
+    this.nickName = _name;
+    this.age = _age;
+    this.job = "singer";
+  }
+}
+const 아이유 = new PersonInfo("아이유", 20);
+const BTS = new PersonInfo("BTS", 20);
+
+```
+
+### 14.3 연습예제 
+```js
+const student_1 ={
+  name : "홍길동",
+  age: 10,
+};
+
+const student_2 = {
+  name: "둘리"
+  age: 2000,
+};
+
+
+
+function Student (_name, _age)
+{
+    this.name = _name;
+    this.age = _age;
+};
+const student_1 = new Student("홍길동", 10);
+const student_2  = new Student("둘리", 2000);
+
+
+class Student {
+constructor (_name, _age)
+{
+
+  this.name = _name;
+  this.age = _age;
+}
+}
+const student_1 = new Student("홍길동", 10);
+const student_2  = new Student("둘리", 2000);  
+
+```
+
+### 14.4 객체에 값 말고 `기능 추가` 하기
+
+- 기능은 흔히 `메소드(Method)` 또는 `행위(Behavior)`라고 호칭
+- 객체 리터럴로 메소드 추가해 보기 
+
+```js
+const student_1 = {
+  name: "홍길동",
+  age: 20,
+  sayName: function (){
+    this.name
+    }, // 객체
+  sayAge: () => {
+    this.age
+    }, //window
+  // 가장 최신 문법으로서 정확히 메소드 임을 표현
+  sayHi () {},
+
+}
+```
