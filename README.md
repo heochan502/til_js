@@ -2794,7 +2794,6 @@ console.log(a.#nose); // private 오류
 
 ### 12.6. static : 클래스에 고정된 속성, 메소드
 
-
 ```js
 class MathCalc {
   constructor() {}
@@ -2814,32 +2813,29 @@ Math.ceil(); //오림
 
 ## 13. 콜벡 함수
 
- - `call` 은 함수를 실행(호출) 한다는 의미
- - 일반 함수에 매개변수로 전달된 함수를 callback 함수라 칭한다.
+- `call` 은 함수를 실행(호출) 한다는 의미
+- 일반 함수에 매개변수로 전달된 함수를 callback 함수라 칭한다.
 
- ### 13.1. 콜백함수 활용처 
+### 13.1. 콜백함수 활용처
 
- - 주로 사용자 행동에 따른 이벤트 발생시 실행하는 함수
- - 서버 연동하여 자료를 호출하는 `이벤트 발생`시 실행하는 함수
-
+- 주로 사용자 행동에 따른 이벤트 발생시 실행하는 함수
+- 서버 연동하여 자료를 호출하는 `이벤트 발생`시 실행하는 함수
 
 ```js
 const say = function () {};
 const cry = () => {};
-function smile(){}
+function smile() {}
 
 //매개변수로 전달된 함수 실행
-function run(a){
+function run(a) {
   a();
 }
 
 run(say);
 run(cry);
 run(smile); // 변수아니라서 안됨
-run(function (){}); // 이걸 추천함
-
+run(function () {}); // 이걸 추천함
 ```
-
 
 ```js
 const bt = document.querySelector(".bt");
@@ -2848,10 +2844,10 @@ bt.addEventListener("click", function () {});
 
 ## 14. 객체 (Object)
 
- - `객체 리터럴`로 생성한다.
- - `리터럴(literal)` 이라는 단어는 꼭 정의해 두세요.
-    - 이터럴은 정해진 `값을 개발자가 직접 작성`해 주는 것.
-    - 숫자 리터럴, 문자열 리터럴, 배열 리터럴, 객체 리터럴 등
+- `객체 리터럴`로 생성한다.
+- `리터럴(literal)` 이라는 단어는 꼭 정의해 두세요.
+  - 이터럴은 정해진 `값을 개발자가 직접 작성`해 주는 것.
+  - 숫자 리터럴, 문자열 리터럴, 배열 리터럴, 객체 리터럴 등
 
 ```js
 const 객체 = {
@@ -2863,31 +2859,32 @@ const 객체 = {
   background-color: "red"
 }
 ```
- - 만약 객체를 1개씩 만든다면 즉, `객체리터럴로 생성한다`면 객체명은 소문자로
 
- ```js
- const personInfo = {
-  nickName : "아이유",
-  age : 20,
-  job: "singer"
- };
- ```
+- 만약 객체를 1개씩 만든다면 즉, `객체리터럴로 생성한다`면 객체명은 소문자로
 
- ### 14.2. 여러 개의 동일한 형태(구조)의 객체를 생성한다면
-  - `함수 생성자 함수`를 이용하는 법 (함수 이름이 `Pascal Case`)
+```js
+const personInfo = {
+  nickName: "아이유",
+  age: 20,
+  job: "singer",
+};
+```
 
-  ```js
-  function PersonInfo(_name, _age){
-    this.nickName = _name;
-    this.age = _age;
-    this.job = "singer";
-  }
-  const 아이유 = new PersonInfo("아이유", 20);
-  const BTS = new PersonInfo("BTS", 20);
+### 14.2. 여러 개의 동일한 형태(구조)의 객체를 생성한다면
 
-  ```
-  - `클래스 `를 이용하는 법(클래스 이름이 `Pascal Case`)
+- `함수 생성자 함수`를 이용하는 법 (함수 이름이 `Pascal Case`)
 
+```js
+function PersonInfo(_name, _age) {
+  this.nickName = _name;
+  this.age = _age;
+  this.job = "singer";
+}
+const 아이유 = new PersonInfo("아이유", 20);
+const BTS = new PersonInfo("BTS", 20);
+```
+
+- `클래스 `를 이용하는 법(클래스 이름이 `Pascal Case`)
 
 ```js
 class PersonInfo {
@@ -2899,10 +2896,10 @@ class PersonInfo {
 }
 const 아이유 = new PersonInfo("아이유", 20);
 const BTS = new PersonInfo("BTS", 20);
-
 ```
 
-### 14.3 연습예제 
+### 14.3 연습예제
+
 ```js
 const student_1 ={
   name : "홍길동",
@@ -2934,27 +2931,541 @@ constructor (_name, _age)
 }
 }
 const student_1 = new Student("홍길동", 10);
-const student_2  = new Student("둘리", 2000);  
+const student_2  = new Student("둘리", 2000);
 
 ```
 
 ### 14.4 객체에 값 말고 `기능 추가` 하기
 
 - 기능은 흔히 `메소드(Method)` 또는 `행위(Behavior)`라고 호칭
-- 객체 리터럴로 메소드 추가해 보기 
+- 객체 리터럴로 메소드 추가해 보기
 
 ```js
 const student_1 = {
   name: "홍길동",
   age: 20,
-  sayName: function (){
-    this.name
-    }, // 객체
+  sayName: function () {
+    this.name;
+  }, // 객체
   sayAge: () => {
-    this.age
-    }, //window
+    this.age;
+  }, //window
   // 가장 최신 문법으로서 정확히 메소드 임을 표현
-  sayHi () {},
+  sayHi() {
+    this.age;
+  },
+};
+```
 
+prototype // 하나의 리소스를 같이 쓰면 이걸쓴다
+
+- 위의 `객체 생성자 함수` 로 수정해 보자.
+
+```js
+function Student(_name, _age){
+  this.name = _name;
+  this.age = _age;
+  this.sayName = function () {
+    console.log(this.name); // 객체
+  },
+  // 아 위험하다. 화살표 주의
+  this.sayAge = () => {
+    console.log(this.age); // window
+  },
+  // this.sayHi = () {
+  //   console.log(this.age);
+  // },
+}
+// 같은 리소스를 사용할 때는 prototype 쓰자
+Student.prototype.sayHi = function(){}
+
+const student_1 = new Student("홍길동", 20)
+```
+
+- 클래스로 만들어 보자. (직금은 괜찮다. JAVA 배우고 써도된다. 활용도 떨어짐)
+
+```js
+class Student {
+  constructor(_name, _age) {
+    this.name = _name;
+    this.age = _age;
+  }
+  sayName() {
+    this.name;
+  }
+  sayAge() {
+    this.age;
+  }
+  sayHi() {
+    this.name;
+  }
+}
+const student_1 = new Student("홍길동", 20);
+```
+
+- `정말 중요함 1. : Vue, React 에서는 기본이 객체 생성으로 시작함.`
+- `정말 중요함 2. : Vue, React 에서는 화살표 함수를 기본으로 함.`
+- `객체 생성자 함수`, `클래스`의 화살표 함수에서의 `this 는 객체`를 가르킨다.
+
+### 15. 배열 (Array)
+
+- 데이터 종류와 상관없이 여러개를 `인덱신(순서대로)` 할 수 있습니다.
+
+```js
+// 가장 많이 함 (배열 리터럴)
+const 배열명 = [요소, 요소, 요소];
+// 추천하지 않음
+const 배열명 = new Array(3);
+```
+
+### 15.2. 배열의 요소를 인덱스로 찾기
+
+```js
+const 배열 = [1,"안녕",false, fuction(){}];
+배열 [0];
+배열 [1];
+배열 [2];
+배열 [3];
+
+```
+
+### 15.3. 배열도 객체라서 `속성`이 있어요.
+
+```js
+const 배열 = [1, 3, 5];
+배열.length; //3개
+```
+
+### 15.4 무지막지하게 데이터 종류 중 배열을 다룹니다.
+
+- 일반적 데이터 형태 : `[{},{},{},{}]`
+- 배열을 프로그래밍에서 많이 다루므로 `미리 함수를 제공` 함(빌트인 함수).
+- 주의 사항으로서 절대로 `원본을 훼손하지 마셔야 합니다`(불변성 유지).
+
+### 15.5. 배열을 다루는 함수에서 원본을 훼손하는 배열함수
+
+- `이서 쓰시면 안됩니다.`
+
+- push() : 배열 `끝`에 추가
+
+```js
+const lunchArr = ["사과", "딸기", "과자", "햄버거"];
+lunchArr.push("커피");
+console.log(lunchArr);
+// 커피 추가 (원본 훼손)
+// [  "사과",  "딸기",  "과자",  "햄버거",  "커피"]
+```
+
+- pop() : `끝` 요소 제거 및 제거된 요소 반환
+
+```js
+const lunchArr = ["사과", "딸기", "과자", "햄버거"];
+lunchArr.pop();
+console.log(lunchArr);
+// 햄버거 제거 (원본 훼손)
+// [  "사과",  "딸기",  "과자"]
+```
+
+- unshift() : `앞` 요소 추가
+
+```js
+const lunchArr = ["사과", "딸기", "과자", "햄버거"];
+lunchArr.unshift("커피");
+console.log(lunchArr);
+// 햄버거 앞자리 추가 (원본 훼손)
+// ["커피", "사과",  "딸기",  "과자", "햄버거"]
+```
+
+- shift() : `앞 첫번째` 요소 제거
+
+```js
+const lunchArr = ["사과", "딸기", "과자", "햄버거"];
+lunchArr.shift();
+console.log(lunchArr);
+// 햄버거 앞자리 제거 (원본 훼손)
+// ["딸기",  "과자", "햄버거"]
+```
+
+- splice() : `원하는 인덱스` 부터 추가, 제거
+
+```js
+const lunchArr = ["사과", "딸기", "과자", "햄버거"];
+lunchArr.splice(1, 2);
+console.log(lunchArr);
+// 인덱스로 부터 개수만큼 제거 (원본 훼손)
+// ["사과", "햄버거"]
+```
+
+- sort() : 배열의 순서를 정렬하기
+
+```js
+const lunchArr = ["사과", "딸기", "과자", "햄버거"];
+lunchArr.sort();
+console.log(lunchArr);
+// ['과자', '딸기', '사과', '햄버거']
+const enArr = ["k", "o", "r", "e", "A", "j", "p", "a", "n"];
+
+// 원본훼손
+enArr.sort();
+console.log(enArr);
+// ['A', 'a', 'e', 'j', 'k', 'n', 'o', 'p', 'r']
+const numArr = [1, 2, 12, 25, 37, 30];
+// 원본훼손
+numArr.sort();
+console.log(numArr);
+// 단순히 sort() 를 사용하면 앞 글자를 기준으로 정렬됨.
+// [1, 12, 2, 25, 30, 37]
+
+// 내림 차순으로 정렬해 보자.
+// numArr.sort((a, b) => b - a);
+// [37, 30, 25, 12, 2, 1]
+
+// 올림 차순
+numArr.sort((a, b) => a - b);
+console.log(numArr);
+// [1, 2, 12, 25, 30, 37]
+```
+
+- reverse() : `역순` 순서를 뒤집어 저장
+
+```js
+const numArr = [1, 2, 12, 25, 37, 30];
+// 원본 훼손
+numArr.reverse();
+console.log(numArr);
+// [30, 37, 25, 12, 2, 1]
+```
+
+- fill() : 요소에 값을 채운다.
+
+```js
+const numArr = [1, 2, 12, 25, 37, 30];
+// 원본 훼손
+// numArr.fill(0);
+console.log(numArr);
+// [0, 0, 0, 0, 0, 0]
+// 값 1 을 채워라
+// 인덱스 3번으로 부터
+// 인덱스 5번 전까지
+// 1 바귈 값 3 시작점 5 끝전점
+numArr.fill(1, 3, 5);
+console.log(numArr);
+// [1, 2, 12, 1, 1, 30]
+```
+
+- flat() : `배열을 평탄화` 사용합니다.
+  : flat 을 위한 별도의 라이브러가 존재합니다.
+  : react 에서 모듈을 설치해서 사용합니다.
+
+```js
+const numArr = [1, 2, 3, ["a", "b", "c"], 8, 9];
+// flat(배열의 단계)
+const result = numArr.flat(1);
+console.log(result);
+// [1, 2, 3, 'a', 'b', 'c', 8, 9]
+const num2Arr = [1, 2, [3, [4, [5, 6]]], 100];
+const result2 = num2Arr.flat(1);
+console.log(result2);
+// [1, 2, 3, Array(2), 100]
+const result3 = result2.flat(1);
+console.log(result3);
+// [1, 2, 3, 4, Array(2), 100]
+const result4 = result3.flat(1);
+console.log(result4);
+// [1, 2, 3, 4, 5, 6, 100]
+```
+
+### 15.6. 배열을 다루는 함수에서 원본을 훼손하지 않고 `새로운 배열을 만들어 주는 함수`
+
+- `데이터 불변성(immutability)` 유지하셨나요?
+
+#### 15.6.1. map()
+
+- `star가 1000만개` 가치가 있고, 자주활용
+- 원본 배열의 요소에 동일한 함수 실행 후 새로운 배열로 생성
+
+```js
+원본배열.map(function (요소, 인덱스, 원본배열) {});
+// 아래의 item index arr 은 변수명임 따로 지정되어 있는거 아님
+const originArr = ["홍길동", "고길동", "김수한무"];
+const copyArr = originArr.map(function (item, index, arr) {
+  // console.log(`item : ${item}, index: ${index}`);
+  const tag = `<div class="user-info">${item}</div>`;
+  console.log(tag);
+  // 리턴해야 배열이 담깁니다.
+  return tag;
+});
+console.log(`원본 originArr : ${originArr}`);
+console.log(`복제본 copyArr : ${copyArr}`);
+
+const copyArrowArr = originArr.map((item, index) => {
+  return `<a href="${index}">${item}</a>`;
+});
+console.log(`복제본 copyArrowArr : ${copyArrowArr}`);
+```
+
+#### 15.6.2. filter()
+
+- 조건에 참인 것만 모아서 배열 리턴
+- 자주 사용은 합니다.
+
+```js
+const memberHong = {
+  age: 10,
+  name: "홍길동",
+  role: "GUEST",
+};
+const memberKim = {
+  age: 18,
+  name: "김수한무",
+  role: "MEMBER",
+};
+const memberPark = {
+  age: 25,
+  name: "박둘리",
+  role: "ADMIN",
+};
+
+const originArr = [memberHong, memberKim, memberPark];
+
+const result =0-
+. originArr.filter((item, index) => {
+  // return item.role === "ADMIN";
+  return item.age <= 20;
+});
+console.log(result);
+```
+
+#### 15.6.3. slice()
+
+- 배열의 일부를 복사한다.
+
+```js
+const numArr = [1, "a", "b", 4];
+// 시작 인덱스로 부터 도착 인덱스 미만 요소 출력
+const nowArr = numArr.slice(1, 3);
+console.log(numArr);
+console.log(nowArr); //  ['a', 'b']
+```
+
+#### 15.6.4. concat();
+
+- 배열을 `합쳐서` 하나의 배열을 리턴.
+
+```js
+const numArr1 = [1, "a", "b", 4];
+const numArr2 = [8, 100];
+const result = numArr1.concat(numArr2);
+console.log(result);
+// [1, 'a', 'b', 4, 8, 100]
+```
+
+#### 15.6.5. reduce();
+
+- 배열의 요소를 탐색하면서 누적 연산함.
+- 누적된 결과를 출력함.
+
+```js
+const numArr1 = [1, 2, 3, 4];
+// 문법이 좀 다릅니다.
+// 보통은 ===>  (item, index, arr)
+// const total = numArr1.reduce(함수, 초기값)
+const total = numArr1.reduce((acc, cur) => {
+  console.log("acc : ", acc);
+  console.log("cur : ", cur);
+  return acc + cur;
+}, 0);
+
+console.log("total : ", total);
+```
+
+#### 15.6.6. join();
+
+- 문자열로 배열을 연결한 결과를 만든다.
+
+```js
+const numArr1 = [1, 2, 3, 4];
+// 기본은 ,  연결된 글자
+const result = numArr1.join("#");
+// 결과는 string
+console.log(`typeof ${typeof result} , ${result}`);
+// typeof string , 1#2#3#4
+```
+
+#### 15.6.7. indexOf();
+
+- 찾는 요소가 몇번째 인덱스 인지를 파악
+
+```js
+const numArr1 = [1, 2, 3, 4];
+// 기본은 ,  연결된 글자
+const result = numArr1.indexOf(3);
+console.log(`typeof ${typeof result} , ${result}`);
+// typeof number , 인덱스 2
+```
+
+#### 15.6.8. includes();
+
+- 요소가 포함되었는지 아닌지
+
+```js
+const numArr1 = [1, 2, 3, 4];
+// 기본은 ,  연결된 글자
+const result = numArr1.includes(3);
+console.log(`typeof ${typeof result} , ${result}`);
+// typeof boolean , true
+```
+
+## 16. 객체 (`{}`)와 배열 (`[]`)의 필수 이해 사항
+
+### 16.1. 반복문
+
+- 배열에서 사용하는 경우의 반복문 문법
+
+```js
+const arr = [1, 2, 3, 4];
+// 가장 전통적인 방식
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+//배열의 요소 반복문 버전
+arr.forEach(function (item) {
+  console.log(item);
+});
+
+// 배열의  for of 문
+for (const item of arr) {
+  console.log(item);
+}
+
+// 배열의 map : 새로운 배열을 만듦
+const now = arr.map(function () {
+  return item;
+});
+```
+
+- 객체에서 사용하는 경우의 반복문 문법
+
+```js
+const person = {
+  age:10,
+  nickName: "hong",
+  isMember: false,
+};
+
+// 객체의 속성명 알아내기
+for (let key in person){
+  console.log(key); // age nickName, isMember
+};
+
+// 객체의 속성에 보관하는 값 알아내기
+for (let key in person){
+  console.log(person.[key]); // 10 hong, false
+};
+```
+
+### 16.2 값을 추출해서 보관하기
+
+- 배열
+
+```js
+const arr = ["사과", "딸기", "참외"];
+// 아래처럼 요소 값을 알아내느 것은 비추천
+
+arr[0];
+arr[1];
+arr[2];
+// 반복문으로 알아내기
+for (let i = 0; i < arr.length; i++) {
+  arr[i];
 }
 ```
+
+- `배열  Spread 문법 : 별이 5000만개`
+  - 배열의 요소를 알아내고,
+  - 배열의 요소를 복사하고, 
+  - 새로운 배열에 담아주고
+
+
+```js
+const arr = ["사과", "딸기","참외"];
+// 아래처럼은 하지는 않습니다. 
+
+const apple =  arr[0];
+const straw =  arr[1];
+const melon =  arr[2];
+
+// 배열  Spread 문법
+const [apple, straw, melon] = [...arr];
+
+// 두 배열을  Spread 문법으로 합치기
+const numArr = [1,2,3];
+const strArr = ["a","b","c"];
+const restArr = strArr.reverse();// 배열 역순 으로 뒤집기
+
+// [1, "a","b","c",2,3 ];
+// 아래 처럼은 권장하지는 않습니다. 
+ const samplelArr = [1,strArr[1],strArr[2],strArr[3], 2,3 ];
+
+ // Spread 활용
+ const resultArr = [1,...strArr,2,3]; 
+// 구분하세요 (Rest 파라메터 문법)
+function showArr(...rest){};
+
+
+const person = {
+  age:10,
+  nickName: "hong",
+  isMember: false,
+};
+
+// 이렇게는 하지 않습니다. 
+
+const newPerson = {
+  age: person.age,
+  nickName: person.nickName,
+  isMember: person.isMember,
+};
+
+// 객체 Spread 문법 
+const nowPerson = {...person};
+
+// 두개의 객체를 합치기
+
+const a = {age:10, name: "hong"};
+const b = {city:"대구", year: 2025};
+
+const resutl = {...a,...b};
+// 결과 {age:10, name:"hong", city:"대구", year:2025 }
+
+// 원본 객체 복사하고 새로운 속성 추가하기 
+
+const ari = {a:1, b:"안녕"};
+const now = {...ari, gogo:"happy"};
+//now {a:1,b:"안녕", gogo:"happy"}
+
+// 함수에 매개변수로 객체를 복사해서 전달하기
+const user = {name:"아이유",age:20};
+function show ({name,age}){
+  console.log(name);
+  console.log(age);
+}
+const user = {name:"아이유", age:20};
+show({...user});
+
+
+```
+
+
+## 17. 비동기 (Asyncronous) 통신
+- `비동기`는 시간이 오래 걸리는 작업
+- 예) 데이터 서버에서 자료를 요청(Request) 및 응답(Response)
+- 예) 데이터 서버에서 파일 전송 시
+- 비동기 작업 중에 결과를 기다리지 않고 다른 작업을 병렬로 실행하도록
+
+### 17.1. 비동기 작업 문법 종류
+
+- XHR (Xml Http Request)
+- Callback
+- Promise
+- async/await

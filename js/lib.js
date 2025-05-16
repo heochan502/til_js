@@ -540,13 +540,97 @@
 // console.log(a.eye);
 // console.log(a.#nose); // private 오류
 
-class MathCalc {
-  constructor() {}
-  static add(a, b) {}
-  static minus(a, b) {}
-}
-MathCalc.add(3, 4);
-MathCalc.minus(3, 4);
+// class MathCalc {
+//   constructor() {}
+//   static add(a, b) {}
+//   static minus(a, b) {}
+// }
+// MathCalc.add(3, 4);
+// MathCalc.minus(3, 4);
 
-const a = new MathCalc();
-a.add(3, 4);
+// const a = new MathCalc();
+// a.add(3, 4); // 생성된 객체로 접근불가
+
+// Math.PI;
+// Math.round(); //반올림
+// Math.ceil(); //오림
+
+// const say = function () {};
+// const cry = () => {};
+// function smile(){}
+
+// //매개변수로 전달된 함수 실행
+// function run(a){
+//   a();
+// }
+
+// run(say);
+// run(cry);
+// run(smile); // 변수아니라서 안됨
+// run(function (){}); // 이걸 추천함
+
+// const bt  = document.querySelector(".bt");
+// bt.addEventListener("click", function(){});
+
+// const originArr = ["홍길동", "고길동", "김수한무"];
+// const copyArr = originArr.map(function (item, index, arr) {
+//   // console.log(`item : ${item}, index: ${index}`);
+//   const tag = `<div class="user-info">${item}</div>`;
+
+//   // 리턴해야 배열이 담깁니다.
+//   return tag;
+// });
+// console.log(copyArr);
+// console.log(`원본 originArr : ${originArr}`);
+// console.log(`복제본 copyArr : ${copyArr}`);
+
+// const copyArrowArr = originArr.map((item, index) => {
+//   return `<a href="${index + 1}">${item + index}</a>`;
+// });
+// console.log(`복제본 copyArrowArr : ${copyArrowArr}`);
+
+// const numbers = [2, 3, 4, 1];
+// const sum = numbers.reduce(function (acc, num) {
+//   return acc + num;
+// }, 0);
+// console.log(sum);
+
+// const numArr1 = [1, 2, 3, 4];
+// // 문법이 좀 다릅니다.
+// // 보통은 ===>  (item, index, arr)
+// // const total = numArr1.reduce(함수, 초기값)
+// const total = numArr1.reduce((acc, cur) => {
+//   console.log("acc : ", acc);
+//   console.log("cur : ", cur);
+//   return acc + cur;
+// }, 0);
+
+// 데이터 서버를 자료를 호출함 .
+
+//1. xht 객체 한개 만듦.
+const xhr = new XMLHttpRequest();
+
+//2. 주소를 연결함
+// 백엔드 호출시 메소드 5가지
+// GET : 자료를 주세요.
+// POST : 자료를 추가합니다.
+// DELETE : 자료를 삭제해주세요.
+// PUT : 자료 전체를 수정해 주세요.
+// PATCH : 자료내용에서 일부분만 수정해 주세요.
+
+xhr.open("GET", "https://jsonplaceholder.typicode.com/");
+
+// 3. 웹브라우저로 요청을 합니다.
+xhr.send();
+
+// 4. 요청이후 응답이 오기를 기다린다.
+xhr.onload = function () {
+  console.log("요청이 되어졌을 떄 백엔드 회신정보 : ", chr);
+  if (xhr.status === 200) {
+    console.log("정상적인 Response 됨");
+  } else if (xhr.status === 404) {
+    console.log("주소가 잘못 되었습니다.");
+  } else if (xhr.status === 505) {
+    console.log("서버에 오류입니다. 잠시 후 시도해 주세요. ");
+  }
+};
