@@ -3383,43 +3383,41 @@ for (let i = 0; i < arr.length; i++) {
 
 - `배열  Spread 문법 : 별이 5000만개`
   - 배열의 요소를 알아내고,
-  - 배열의 요소를 복사하고, 
+  - 배열의 요소를 복사하고,
   - 새로운 배열에 담아주고
 
-
 ```js
-const arr = ["사과", "딸기","참외"];
-// 아래처럼은 하지는 않습니다. 
+const arr = ["사과", "딸기", "참외"];
+// 아래처럼은 하지는 않습니다.
 
-const apple =  arr[0];
-const straw =  arr[1];
-const melon =  arr[2];
+const apple = arr[0];
+const straw = arr[1];
+const melon = arr[2];
 
 // 배열  Spread 문법
 const [apple, straw, melon] = [...arr];
 
 // 두 배열을  Spread 문법으로 합치기
-const numArr = [1,2,3];
-const strArr = ["a","b","c"];
-const restArr = strArr.reverse();// 배열 역순 으로 뒤집기
+const numArr = [1, 2, 3];
+const strArr = ["a", "b", "c"];
+const restArr = strArr.reverse(); // 배열 역순 으로 뒤집기
 
 // [1, "a","b","c",2,3 ];
-// 아래 처럼은 권장하지는 않습니다. 
- const samplelArr = [1,strArr[1],strArr[2],strArr[3], 2,3 ];
+// 아래 처럼은 권장하지는 않습니다.
+const samplelArr = [1, strArr[1], strArr[2], strArr[3], 2, 3];
 
- // Spread 활용
- const resultArr = [1,...strArr,2,3]; 
+// Spread 활용
+const resultArr = [1, ...strArr, 2, 3];
 // 구분하세요 (Rest 파라메터 문법)
-function showArr(...rest){};
-
+function showArr(...rest) {}
 
 const person = {
-  age:10,
+  age: 10,
   nickName: "hong",
   isMember: false,
 };
 
-// 이렇게는 하지 않습니다. 
+// 이렇게는 하지 않습니다.
 
 const newPerson = {
   age: person.age,
@@ -3427,37 +3425,35 @@ const newPerson = {
   isMember: person.isMember,
 };
 
-// 객체 Spread 문법 
-const nowPerson = {...person};
+// 객체 Spread 문법
+const nowPerson = { ...person };
 
 // 두개의 객체를 합치기
 
-const a = {age:10, name: "hong"};
-const b = {city:"대구", year: 2025};
+const a = { age: 10, name: "hong" };
+const b = { city: "대구", year: 2025 };
 
-const resutl = {...a,...b};
+const resutl = { ...a, ...b };
 // 결과 {age:10, name:"hong", city:"대구", year:2025 }
 
-// 원본 객체 복사하고 새로운 속성 추가하기 
+// 원본 객체 복사하고 새로운 속성 추가하기
 
-const ari = {a:1, b:"안녕"};
-const now = {...ari, gogo:"happy"};
+const ari = { a: 1, b: "안녕" };
+const now = { ...ari, gogo: "happy" };
 //now {a:1,b:"안녕", gogo:"happy"}
 
 // 함수에 매개변수로 객체를 복사해서 전달하기
-const user = {name:"아이유",age:20};
-function show ({name,age}){
+const user = { name: "아이유", age: 20 };
+function show({ name, age }) {
   console.log(name);
   console.log(age);
 }
-const user = {name:"아이유", age:20};
-show({...user});
-
-
+const user = { name: "아이유", age: 20 };
+show({ ...user });
 ```
 
-
 ## 17. 비동기 (Asyncronous) 통신
+
 - `비동기`는 시간이 오래 걸리는 작업
 - 예) 데이터 서버에서 자료를 요청(Request) 및 응답(Response)
 - 예) 데이터 서버에서 파일 전송 시
@@ -3469,3 +3465,211 @@ show({...user});
 - Callback
 - Promise
 - async/await
+
+### 17.2. 데모용 API 사이트
+
+- https://jsonplaceholder.typicode.com/
+- https://www.data.go.kr/index.jsp
+
+## 17.3. XHR
+
+- 서버와 통신하는 작업을 위해서 기본적으로 제공이 됨.
+- `Request` : url로 자료를 요청한다.
+- `Response` : 응답, url 로 부터 자료를 돌려받는다.
+- status 200류의 값 : 정상적으로 자료를 전달함.
+- status 400류의 값 : url이 존재 하지 않음.
+- status 500류의 값 : 데이터 서버가 오류거나 전원이 꺼짐.
+- https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Status
+
+```js
+// 데이터 서버에 자료를 호출함.
+
+// 1. xhr 객체 한개 만듦
+const xhr = new XMLHttpRequest();
+
+// 2. 주소를 연결함
+// 백엔드 호출시 메소드 5가지 (RestAPI 라고 함)
+// GET   : 자료를 주세요.
+// POST  : 자료를 추가합니다.
+// DELETE : 자료를 삭제해 주세요.
+// PUT   :  자료 전체를 수정해 주세요.
+// PATCH :  자료 내용에서 일부분만 수정해 주세요.
+xhr.open("GET", "https://jsonplaceholder.typicode.com/photos");
+
+// 3. 웹브라우저로 요청을 합니다.
+xhr.send();
+
+// 4. 요청 이후 응답이 오기를 기다린다.
+xhr.onload = function () {
+  console.log("요청이 되어졌을 때 백엔드 회신정보 : ", xhr);
+  if (xhr.status === 200) {
+    console.log("정상적인 Response 됨");
+  } else if (xhr.status === 404) {
+    console.log("주소가 잘못되었네요.");
+  } else if (xhr.status === 505) {
+    console.log("서버에 오류입니다. 잠시 후 시도해 주세요.");
+  }
+};
+```
+
+### 17.4 Callback 활용하기
+
+- 자료 응답 후 처리 하기
+
+```js
+// 데이터 서버에 자료를 호출함.
+
+function getData(api = "posts", fn) {
+  // 1. xhr 객체 한개 만듦
+  const xhr = new XMLHttpRequest();
+  // 2. 주소를 연결함
+  xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+  // 3. 웹브라우저로 요청을 합니다.
+  xhr.send();
+
+  // 4. 요청 이후 응답이 오기를 기다린다.
+  xhr.onload = function () {
+    console.log("요청이 되어졌을 때 백엔드 회신정보 : ", xhr);
+    if (xhr.status === 200) {
+      console.log("정상적인 Response 됨");
+      // 콜백함수 : 자료가 오면 자료를 활용하고 싶다.
+      fn();
+    } else if (xhr.status === 404) {
+      console.log("주소가 잘못되었네요.");
+    } else if (xhr.status === 505) {
+      console.log("서버에 오류입니다. 잠시 후 시도해 주세요.");
+    }
+  };
+}
+
+// 콜백함수 만들기 : 자료가 들어오면 처리함.
+function postsParser = (res){
+  console.log("res");
+};
+
+
+function postsParser = (res){};
+function commentsParser = (res){};
+function albumsParser = (res){};
+function photosParser = (res){};
+function todosParser = (res){};
+function usersParser = (res){};
+
+// 함수 사용
+getData();
+getData("posts", postsParser);
+getData("comments", commentsParser);
+getData("albums", albumsParser);
+getData("photos", photosParser);
+getData("todos", todosParser);
+getData("users", usersParser);
+
+
+```
+
+### 17.5. Promise 활용하기
+
+- 서버연동이 끝날 때 원하는 콜백함수 실행
+- 2개의 매개 변수를 전달 받는다.
+- resolve 콜백함수 : 성공시 실행함수
+- reject 콜백함수 : 실패시 실행함수
+
+```js
+// 함수 사용
+getData("posts")
+  .then(function () {})
+  .catch(function () {});
+
+// 함수 사용 // then 성공 할떄 // catch 실패 할때
+
+getData("posts").then().catch();
+getData("comments").then().catch();
+getData("albums").then().catch();
+getData("photos").then().catch();
+getData("todos").then().catch();
+getData("users").then().catch();
+```
+
+```js
+// 데이터 서버에 자료를 호출함.
+
+function getData(api = "posts") {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+    xhr.send();
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // 성공
+        resolve(xhr.response);
+      } else if (xhr.status === 404) {
+        // 실패
+        reject("데이터 없어요.");
+      } else if (xhr.status === 505) {
+        console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+      }
+    };
+  });
+}
+// 함수 사용
+getData("posts")
+  .then(function (data) {
+    return getData("comments");
+  })
+  .then(function (data) {
+    return getData("albums");
+  })
+  .then(function (data) {
+    return getData("photos");
+  })
+  .then(function (data) {
+    return getData("todos");
+  })
+  .then(function (data) {
+    return getData("users");
+  })
+  .catch(function (err) {});
+```
+
+### 17.7. async/ await
+
+- 강력히 추천합니다.
+- Promise를 편하게 쓰기위해서 최신 문법제공
+- `function 키워드 앞족에 async`를 작성합니다.
+- `BE 연동 쪽에 await`를 작성합니다.
+
+```js
+async function getAllData() {
+  try {
+    const apiUrl = "https://jsonplaceholder.typicode.com";
+    // BE 데이터 연동 시도
+    let res = await fetch(`${apiUrl}/posts`);
+    let data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/comments");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/albums");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/photos");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/todos");
+    data = await res.json();
+    console.log(data);
+
+    res = await fetch("https://jsonplaceholder.typicode.com/users");
+    data = await res.json();
+    console.log(data);
+  } catch (error) {
+    console.log("ERROR 입니다. : " + error);
+  }
+}
+
+getAllData();
+```

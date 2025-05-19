@@ -607,8 +607,27 @@
 
 // 데이터 서버를 자료를 호출함 .
 
-//1. xht 객체 한개 만듦.
-const xhr = new XMLHttpRequest();
+function getData(){
+  //1. xht 객체 한개 만듦.
+  const xhr = new XMLHttpRequest();
+  //2. 주소를 연결함
+  xhr.open("GET", "https://jsonplaceholder.typicode.com/");
+  // 3. 웹브라우저로 요청을 합니다.
+  xhr.send();
+  // 4. 요청이후 응답이 오기를 기다린다.
+  xhr.onload = function () {
+    console.log("요청이 되어졌을 떄 백엔드 회신정보 : ", chr);
+    if (xhr.status === 200) {
+      console.log("정상적인 Response 됨");
+    } else if (xhr.status === 404) {
+      console.log("주소가 잘못 되었습니다.");
+    } else if (xhr.status === 505) {
+      console.log("서버에 오류입니다. 잠시 후 시도해 주세요. ");
+    }
+  };
+  
+}
+
 
 //2. 주소를 연결함
 // 백엔드 호출시 메소드 5가지
@@ -634,3 +653,307 @@ xhr.onload = function () {
     console.log("서버에 오류입니다. 잠시 후 시도해 주세요. ");
   }
 };
+
+// 데이터 서버를 자료를 호출함 .
+
+function getData(api){
+  //1. xht 객체 한개 만듦.
+  const xhr = new XMLHttpRequest();
+  //2. 주소를 연결함
+  xhr.open("GET", "https://jsonplaceholder.typicode.com/");
+  // 3. 웹브라우저로 요청을 합니다.
+  xhr.send();
+  // 4. 요청이후 응답이 오기를 기다린다.
+  xhr.onload = function () {
+    console.log("요청이 되어졌을 떄 백엔드 회신정보 : ", chr);
+    if (xhr.status === 200) {
+      console.log("정상적인 Response 됨");
+    } else if (xhr.status === 404) {
+      console.log("주소가 잘못 되었습니다.");
+    } else if (xhr.status === 505) {
+      console.log("서버에 오류입니다. 잠시 후 시도해 주세요. ");
+    }
+  };  
+}
+
+
+
+
+// 콜백함수 만들기 : 자료가 들어오면 처리함.
+function postsParser = (){
+  console.log("곧 주말임 힘내셈");
+};
+
+
+function postsParser = (){};
+function commentsParser = (){};
+function albumsParser = (){};
+function photosParser = (){};
+function todosParser = (){};
+function usersParser = (){};
+
+// 함수 사용
+getData();
+getData("posts", postsParser);
+getData("comments", commentsParser);
+getData("albums", albumsParser);
+getData("photos", photosParser);
+getData("todos", todosParser);
+getData("users", usersParser);
+
+
+
+// 데이터 서버를 자료를 호출함 .
+
+function getData(api = "posts"){
+  return new Promise(function (resolve, reject){
+
+  }
+);
+}
+
+
+// resolve 성공 // reject 실패 
+return new Promise(function (resolve, reject) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+  xhr.send();
+});
+
+
+
+return new Promise(function (resolve, reject) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+  xhr.send();
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // 성공
+      resolve();
+    } else if (xhr.status === 404) {
+      // 실패
+      reject();
+    } else if (xhr.status === 505) {
+      console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+    }
+  };
+});
+
+
+
+// 데이터 서버에 자료를 호출함.
+
+function getData(api = "posts") {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+    xhr.send();
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // 성공
+        resolve(xhr.response);
+      } else if (xhr.status === 404) {
+        // 실패
+        reject();
+      } else if (xhr.status === 505) {
+        console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+      }
+    };
+  });
+}
+// 콜백함수 만들기 : 자료가 들어오면 처리함.
+const postsParser = function (res) {
+  console.log(res);
+};
+const commentsParser = function (res) {};
+const albumsParser = function (res) {};
+const photosParser = function (res) {};
+const todosParser = function (res) {};
+const usersParser = function (res) {};
+// 함수 사용
+getData("posts", postsParser);
+getData("comments", commentsParser);
+getData("albums", albumsParser);
+getData("photos", photosParser);
+getData("todos", todosParser);
+getData("users", usersParser);
+
+
+
+
+
+
+
+// 데이터 서버에 자료를 호출함.
+
+function getData(api = "posts") {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+    xhr.send();
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // 성공
+        resolve(xhr.response);
+      } else if (xhr.status === 404) {
+        // 실패
+        reject();
+      } else if (xhr.status === 505) {
+        console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+      }
+    };
+  });
+}
+// 콜백함수 만들기 : 자료가 들어오면 처리함.
+const postsParser = function (res) {
+  console.log(res);
+};
+// 함수 사용 // then 성공 할떄 // catch 실패 할떄
+getData("posts" ).then().catch();
+getData("comments" ).then().catch();
+getData("albums" ).then().catch();
+getData("photos" ).then().catch();
+getData("todos" ).then().catch();
+getData("users" ).then().catch();
+
+
+// 데이터 서버에 자료를 호출함.
+
+function getData(api = "posts") {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+    xhr.send();
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // 성공
+        resolve(xhr.response);
+      } else if (xhr.status === 404) {
+        // 실패
+        reject("데이터 없어요.");
+      } else if (xhr.status === 505) {
+        console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+      }
+    };
+  });
+}
+// 함수 사용
+getData("posts")
+      .then(function (data){
+        return getData("comment")})
+      .then(function (data){
+        return getData("albums")})
+      .then(function (data){
+        return getData("photos")})
+      .then(function (data){
+        return getData("todos")})
+      .then(function (data){
+        return getData("users")})
+      
+      .catch(function (err){});
+
+
+getData("comments").then().catch();
+getData("albums").then().catch();
+getData("photos").then().catch();
+getData("todos").then().catch();
+getData("users").then().catch();
+
+
+// 데이터 서버에 자료를 호출함.
+
+function getData(api = "posts") {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `https://jsonplaceholder.typicode.com/${api}`);
+    xhr.send();
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // 성공
+        resolve(xhr.response);
+      } else if (xhr.status === 404) {
+        // 실패
+        reject("데이터 없어요.");
+      } else if (xhr.status === 505) {
+        console.log("서버가 불안정합니다. 잠시 후 재접속해주세요.");
+      }
+    };
+  });
+}
+// 함수 사용
+getData("posts")
+  .then(function (data) {
+    return getData("comments");
+  })
+  .then(function (data) {
+    return getData("albums");
+  })
+  .then(function (data) {
+    return getData("photos");
+  })
+  .then(function (data) {
+    return getData("todos");
+  })
+  .then(function (data) {
+    return getData("users");
+  })
+  .catch(function (err) {});
+
+
+
+  function getAllData(){
+    try {
+      const opiUrl = "https://jsonplaceholder.typicode.com"
+      let res =  await fetch(`${apiUrl}/posts`);
+      let data = res.json();
+      console.log(data);
+      //  BE 데이터 연동 시도
+    res = await fetch(`${apiUrl}/comments`)
+    data res.data.json();
+    console.log(data);
+
+    await fetch("주소")
+    await fetch("주소")
+    await fetch("주소")
+    await fetch("주소")
+    await fetch("주소")
+  } catch(error){
+    console.log("에러입니다.")
+  } 
+}
+  getAlLData();
+
+  async function getAllData() {
+    try {
+      const apiUrl = "https://jsonplaceholder.typicode.com";
+      // BE 데이터 연동 시도
+      let res = await fetch(`${apiUrl}/posts`);
+      let data = res.json();
+      console.log(data);
+  
+      res = await fetch("https://jsonplaceholder.typicode.com/comments");
+      data = await res.json();
+      console.log(data);
+  
+      res = await fetch("https://jsonplaceholder.typicode.com/albums");
+      data = await res.json();
+      console.log(data);
+  
+      res = await fetch("https://jsonplaceholder.typicode.com/photos");
+      data = await res.json();
+      console.log(data);
+  
+      res = await fetch("https://jsonplaceholder.typicode.com/todos");
+      data = await res.json();
+      console.log(data);
+  
+      res = await fetch("https://jsonplaceholder.typicode.com/users");
+      data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log("ERROR 입니다. : " + error);
+    }
+  }
+  
+  getAllData();
+  
